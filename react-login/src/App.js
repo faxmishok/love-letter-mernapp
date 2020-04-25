@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./components/login.component";
 import SignUp from "./components/signup.component";
 import Menu from "./components/menu.component";
+import Solo from "./components/solo.component";
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
             <Route exact path='/' component={Login} />
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={SignUp} />
-            <Route path="/menu" component={Menu} />
           </Switch>
+          <Route path="/menu" component={Menu} />
+          <Route path="/solo" component={Solo} />
     </Router>
   );
 }

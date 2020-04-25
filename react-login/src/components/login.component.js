@@ -12,8 +12,9 @@ export default class Login extends Component {
     }
     render() {
         return (
-            <body>
-    <div className="App">
+                <div className="bcksigup">
+
+    <div className="App"  >
       <nav className="navbar navbar-expand-lg navbar-light fixed-top  background-color: coral">
         <div className="container">
           <Link className="navbar-brand" to={"/sign-in"}>Sign-in</Link>
@@ -47,10 +48,10 @@ export default class Login extends Component {
                     Forgot <a href="#">password?</a>
                 </p>
             </form>
-                    </div>
-      </div>
             </div>
-            </body>
+            </div>
+            </div>
+            </div>
         );
     }
 }

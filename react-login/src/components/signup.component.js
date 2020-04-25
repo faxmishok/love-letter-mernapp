@@ -7,7 +7,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 export default class SignUp extends Component {
     render() {
         return (
-    <div className="App">
+            <div className="bcksigup">
+    <div className="App" >
       <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <div className="container">
           <Link className="navbar-brand" to={"/sign-in"}>Sign-in</Link>
@@ -45,6 +46,8 @@ export default class SignUp extends Component {
                 </p>
             </form>
             </div>
+            </div>
+
             </div>
             </div>
         );
