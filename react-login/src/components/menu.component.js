@@ -26,7 +26,7 @@ export default class Menu extends Component{
 render(){
 return(
 		<body>
-
+			
 			<form>
 			<ul>
                 <button onClick={this.handleClick} class="button button--Solo hvr-pulse-grow">Solo</button>
@@ -37,8 +37,8 @@ return(
                 <button onClick={this.handleClick_6}class="button button--exit hvr-pulse-grow">Sign out</button>
 
 			</ul>
-</form>
-			</body>
+			</form>
+		</body>
 
 );
 }

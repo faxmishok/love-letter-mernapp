@@ -12,8 +12,9 @@ export default class Login extends Component {
     }
     render() {
         return (
+            <body>
     <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+      <nav className="navbar navbar-expand-lg navbar-light fixed-top  background-color: coral">
         <div className="container">
           <Link className="navbar-brand" to={"/sign-in"}>Sign-in</Link>
           <Link className="navbar-brand" to={"/sign-up"}>Sign-up</Link>
@@ -49,6 +50,7 @@ export default class Login extends Component {
                     </div>
       </div>
             </div>
+            </body>
         );
     }
 }
