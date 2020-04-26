@@ -16,7 +16,7 @@ export default class Login extends Component {
 
     <div className="App"  >
       <nav className="navbar navbar-expand-lg navbar-light fixed-top  background-color: coral">
-        <div className="container">
+        <div >
           <Link className="navbar-brand" to={"/sign-in"}>Sign-in</Link>
           <Link className="navbar-brand" to={"/sign-up"}>Sign-up</Link>
         </div>
