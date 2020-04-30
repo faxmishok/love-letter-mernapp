@@ -9,48 +9,24 @@
 }
 
 
-.card1{
-
-
-    position: absolute;
-    top: 0%;
-    left: 50%;
-        max-width: 100%;
-    max-height: 100%;
-}
-
-
-.card2{
-    position: absolute;
-    top: 45%;
-    left: 0%;
-}
-
-.card3{
-    position: absolute;
-    top: 45%;
-    left: 50%;
-}
-
-.card4{
-    position: absolute;
-      top: 45%;
-    left: 50.5%;
-}
 
 .container1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-    height: 100vh;
-
+  height: 100vh;
 }
 .width1{
-    width: 100%;
+    width: 0%;
 }
 
 .width2{
-  height: 50%;
+    width: 0%;
+}
+.width3{
+    width: 0%;
+}
+.width3{
     width: 0%;
 }
 .item {
@@ -63,7 +39,31 @@
 }
 .item-bottom {
   color: green;
+  position: absolute;
+  bottom: 0vh;
+  left: 25vh;
 }
+
+.item-bottom2 {
+  color: green;
+  position: absolute;
+  bottom: 0vh;
+  left: 50vh;
+}
+
+.item-bottom3 {
+  color: green;
+  position: absolute;
+  bottom: 0vh;
+  left: 75vh;
+}
+
+.item-rear {
+  color: blue;
+  position: absolute;
+  bottom: 0vh;
+}
+
 .item-force-move {
   transform: translateY(0) !important;
 }

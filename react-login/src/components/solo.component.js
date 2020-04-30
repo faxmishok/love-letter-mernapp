@@ -9,9 +9,12 @@ import './solo.css';
 
 export default class Solo extends Component {
           state = {
-            top: ['1', '2'],
-            bottom: ['3'],
-            rear: ['ss'],
+            top: ['all card', 'all card'],
+            bottom: ['card'],
+            rear: ['my card','card'],
+            bottom2: ['card'],
+            bottom3: ['card'],
+
             transition: {
               item: null,
               startTop: 0,
@@ -22,13 +25,13 @@ export default class Solo extends Component {
           moveDown = (item, evt) => {
             const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
             const itemTop = (evt.target.offsetTop - listBottom) + this.topList.offsetTop;
-            const { top, bottom,rear, transition } = this.state;
+            const { top, bottom,rear,bottom2,bottom3, transition } = this.state;
             transition.item = item;
             transition.startTop = itemTop;
             transition.startAnim = false;
             this.setState({
               top: top.filter(x => x !== item),
-              rear: [...rear, item]
+              bottom: [...bottom, item]
             })
             setTimeout(() => this.resetState(), 1);
           }
@@ -36,9 +39,9 @@ export default class Solo extends Component {
           moveUp = (item, evt) => {
             const listBottom = this.topList.offsetTop + this.topList.clientHeight;
             const itemTop = evt.target.offsetTop - listBottom;
-            const { top, bottom,rear, transition } = this.state;
+            const {top, bottom,rear,bottom2,bottom3, transition } = this.state;
             transition.item = item;
-            transition.startTop = itemTop;
+            transition.startTop = itemTop/2;
             transition.startAnim = false;
             this.setState({
               top: [...top, item],
@@ -49,11 +52,11 @@ export default class Solo extends Component {
           }
 
           moveDownLeft = (item, evt) => {
-            const listBottom = this.topList.offsetTop + this.topList.clientHeight;
-            const itemTop = evt.target.offsetTop - listBottom;
-            const { top, bottom,rear, transition } = this.state;
+            const listDownlLeft = this.topList.offsetTop + this.topList.clientHeight;
+            const itemTop = evt.target.offsetTop - listDownlLeft;
+            const { top, bottom,rear,bottom2,bottom3, transition  } = this.state;
             transition.item = item;
-            transition.startTop = itemTop;
+            transition.startTop = itemTop/2;
             transition.startAnim = false;
             this.setState({
               top: [...top, item],
@@ -62,7 +65,34 @@ export default class Solo extends Component {
             })
             setTimeout(() => this.resetState(), 1);
           }
-
+          moveUp2 = (item, evt) => {
+            const listBottom = this.topList.offsetTop + this.topList.clientHeight;
+            const itemTop = evt.target.offsetTop - listBottom;
+            const { top, bottom,rear,bottom2,bottom3, transition  } = this.state;
+            transition.item = item;
+            transition.startTop = itemTop/2;
+            transition.startAnim = false;
+            this.setState({
+              top: [...top, item],
+              bottom2: bottom2.filter(x => x !== item),
+              transition,
+            })
+            setTimeout(() => this.resetState(), 1);
+          }
+          moveUp3 = (item, evt) => {
+            const listBottom = this.topList.offsetTop + this.topList.clientHeight;
+            const itemTop = evt.target.offsetTop - listBottom;
+            const { top, bottom,rear,bottom2,bottom3, transition } = this.state;
+            transition.item = item;
+            transition.startTop = itemTop/2;
+            transition.startAnim = false;
+            this.setState({
+              top: [...top, item],
+              bottom3: bottom3.filter(x => x !== item),
+              transition,
+            })
+            setTimeout(() => this.resetState(), 1);
+          }
           resetState = () => {
             const { transition } = this.state;
             transition.startAnim = true;
@@ -70,7 +100,7 @@ export default class Solo extends Component {
           }
           
           render() {
-            let { top, bottom,rear, transition } = this.state
+            let { top, bottom,rear,bottom2,bottom3, transition} = this.state
             return (
             	<div className="bcksolo">
               <div className="container1">
@@ -125,7 +155,7 @@ export default class Solo extends Component {
                     }
                     return (
                       <div 
-                        className={`item item-bottom ${animClass}`}
+                        className={`item item-rear ${animClass}`}
                         onClick={(evt) => this.moveDownLeft(item, evt)}
                         style={style}
                       >
@@ -135,6 +165,58 @@ export default class Solo extends Component {
                   })}
                 </div> 
 </div>
+
+
+
+              <div className="width3">
+
+                  <div ref={(node) => { this.bottom2List = node; }}>
+                  {bottom2.map((item) => {
+                    const startTop = transition.item === item ? transition.startTop : 0;
+                    const animClass = transition.startAnim ? 'item-force-move' : '';
+                    const style = {
+                      transform: `translateY(${startTop}px)`,
+                    }
+                    return (
+                      <div 
+                        className={`item item-bottom2 ${animClass}`}
+                        onClick={(evt) => this.moveUp2(item, evt)}
+                        style={style}
+                      >
+                        {item}
+                      </div>
+                    )
+                  })}
+                </div>
+                </div>
+
+
+
+                    <div className="width4">
+
+                  <div ref={(node) => { this.bottom3List = node; }}>
+                  {bottom3.map((item) => {
+                    const startTop = transition.item === item ? transition.startTop : 0;
+                    const animClass = transition.startAnim ? 'item-force-move' : '';
+                    const style = {
+                      transform: `translateY(${startTop}px)`,
+                    }
+                    return (
+                      <div 
+                        className={`item item-bottom3 ${animClass}`}
+                        onClick={(evt) => this.moveUp3(item, evt)}
+                        style={style}
+                      >
+                        {item}
+                      </div>
+                    )
+                  })}
+                </div>
+                </div>
+
+
+
+
 
 </div>
               </div>
