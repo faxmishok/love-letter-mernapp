@@ -28,12 +28,12 @@ return(
 			
 			<form >
 			<ul>
-                <button onClick={this.handleClick} class="button button--Solo hvr-pulse-grow">Solo</button>
-                <button onClick={this.handleClick_2} class="button button--Cooperative hvr-pulse-grow">Cooperative</button>
-                <button onClick={this.handleClick_3} class="button button--Competitive hvr-pulse-grow">Competitive</button>
-                <button onClick={this.handleClick_4} class="button button--Local hvr-pulse-grow">Multiplayer</button>
-                <button onClick={this.handleClick_5} class="button button--Network_Multiplayer hvr-pulse-grow">Rules</button>
-                <button onClick={this.handleClick_6} class="button button--exit hvr-pulse-grow">Sign out</button>
+                <button onClick={this.handleClick} class="button1 button--Solo hvr-pulse-grow">Solo</button>
+                <button onClick={this.handleClick_2} class="button1 button--Cooperative hvr-pulse-grow">Cooperative</button>
+                <button onClick={this.handleClick_3} class="button1 button--Competitive hvr-pulse-grow">Competitive</button>
+                <button onClick={this.handleClick_4} class="button1 button--Local hvr-pulse-grow">Multiplayer</button>
+                <button onClick={this.handleClick_5} class="button1 button--Network_Multiplayer hvr-pulse-grow">Rules</button>
+                <button onClick={this.handleClick_6} class="button1 button--exit hvr-pulse-grow">Sign out</button>
 
 			</ul>
 			</form>

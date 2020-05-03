@@ -5,7 +5,8 @@
   background-position: center; 
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
 }
 
 
@@ -16,19 +17,39 @@
   justify-content: space-between;
   height: 100vh;
 }
-.width1{
-    width: 0%;
+
+
+.container2 {
+  display: flex;
+  flex-direction: row;
+
 }
 
-.width2{
-    width: 0%;
+
+.containerrow_mycard {
+  display: flex;
+  flex-direction: row;
+
 }
-.width3{
-    width: 0%;
+.about1{
+    color: yellow;
+
+    top: 40vh;
+    position: absolute;
+    right: 50vw;
+    left: 30vw;
+
 }
-.width3{
-    width: 0%;
+
+.about2{
+      color: yellow;
+    top: 40vh;
+    position: absolute;
+    right: 20vw;
+    left: 60vw;
+
 }
+
 .item {
   transition: 2s all;
   cursor: pointer;
@@ -36,34 +57,55 @@
 }
 .item-top {
   color: red;
+  position: fixed;
+  top: 0vh;
+  left: 45vw;
+
 }
 .item-bottom {
   color: green;
   position: absolute;
   bottom: 0vh;
-  left: 25vh;
+  left: 33.7vw;
 }
 
 .item-bottom2 {
   color: green;
   position: absolute;
   bottom: 0vh;
-  left: 50vh;
+  left: 54.8vw
 }
-
-.item-bottom3 {
+.item-bottom3{
   color: green;
   position: absolute;
   bottom: 0vh;
-  left: 75vh;
+  left: 75.9vw;
 }
 
 .item-rear {
   color: blue;
   position: absolute;
   bottom: 0vh;
+  left: 11.6vw;
+
 }
 
+
+.item-mycard1 {
+  position: absolute;
+  bottom: 60vh;
+  left: 30vw;
+
+}
+
+.item-mycard2 {
+  position: absolute;
+  bottom: 60vh;
+  left: 59.5vw;
+
+}
+
+
 .item-force-move {
-  transform: translateY(0) !important;
+  transform: translateX(0) !important;
 }

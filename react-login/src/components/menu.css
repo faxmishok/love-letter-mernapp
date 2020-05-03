@@ -9,7 +9,7 @@
     height: 100%;
 }
 
-.button {
+.button1 {
   list-style: none;
   width: 250px;
   height: 48px;
@@ -30,7 +30,7 @@
 
   
 }
-.button:hover {
+.button1:hover {
     box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, 1);
     outline-color: rgba(255, 255, 255, 0);
     outline-offset: 25px;
