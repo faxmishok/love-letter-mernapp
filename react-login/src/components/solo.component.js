@@ -27,7 +27,7 @@ export default class Solo extends Component {
             rear: [card3],
             bottom2: [card4],
             bottom3: [card5],
-            mycards: [card8],
+            mycards: [card8,card9],
             transition: {
               item: null,
               startTop: 20,
@@ -40,7 +40,7 @@ export default class Solo extends Component {
             const itemTop = (evt.target.offsetTop - listBottom) + this.topList.offsetTop;
             const { top, bottom,rear,bottom2,bottom3, transition } = this.state;
             transition.item = item;
-            transition.startTop = itemTop;
+            transition.startTop = itemTop/5;
             transition.startAnim = false;
             this.setState({
               top: top.filter(x => x !== item),
@@ -162,7 +162,6 @@ export default class Solo extends Component {
                       
                                     <img src={mycards[0]} width="125" className="item-mycard1"/>
                                     <img src={mycards[1]} width="125" className="item-mycard2"/>
-                                                        <button >Solo</button>
 
 
 
