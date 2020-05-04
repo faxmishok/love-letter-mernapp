@@ -27,7 +27,7 @@ export default class Solo extends Component {
             rear: [card3],
             bottom2: [card4],
             bottom3: [card5],
-            mycards: [card8,card9],
+            mycards: [card8,card7],
             transition: {
               item: null,
               startTop: 20,
@@ -44,14 +44,14 @@ export default class Solo extends Component {
             transition.startAnim = false;
             this.setState({
               top: top.filter(x => x !== item),
-              bottom: [...bottom, item]
+              rear: [...rear, item]
             })
             setTimeout(() => this.resetState(), 1);
           }
           
           moveUp = (item, evt) => {
             const listBottom = this.topList.offsetTop + this.topList.clientHeight;
-            const itemTop = evt.target.offsetTop - listBottom;
+            const itemTop = evt.target.offsetTop + listBottom;
             const {top, bottom,rear,bottom2,bottom3, transition } = this.state;
             transition.item = item;
             transition.startTop = itemTop;
@@ -158,70 +158,90 @@ export default class Solo extends Component {
 
 
                   
-                    
-                      
-                                    <img src={mycards[0]} width="125" className="item-mycard1"/>
-                                    <img src={mycards[1]} width="125" className="item-mycard2"/>
-
-
+                                  
+                  <img src={mycards[0]} width="125" className="item-mycard1"/>
+                  <img src={mycards[1]} width="125" className="item-mycard2"/>
+                  
+           
 
     <div>
       {(() => {
         if (mycards[0]==="/static/media/baron.ce4d41dc.jpg") {
           return (
+
+ <div>
+            <button className="button_card1_use">Use</button>
+                  <button className="button_card1_discard">Discard</button>
+                  <button className="button_card2_use">Use</button>
+                  <button className="button_card2_discard">Discard</button>
             <div className="about1"><p>BARON</p>
             Player will choose another player and privately compare hands. The player with the lower-strength hand is eliminated from the round. 
             </div>
+      </div>
           )
         } else if (mycards[0]==="/static/media/countess.a48c395a.jpg") {
           return (
+ <div>
+            <button className="button_card1_use">Use</button>
+                  <button className="button_card1_discard">Discard</button>
             <div className="about1"><p>Countess</p>
-          If a player holds both this card and either the King or Prince card, this card must be played immediately.             </div>
+          If a player holds both this card and either the King or Prince card, this card must be played immediately. 
+          </div>            </div>
           )
         } 
         else if (mycards[0]==="/static/media/guard.b6e3701e.jpg") {
           return (
+             <div>
+            <button className="button_card1_use">Use</button>
+                  <button className="button_card1_discard">Discard</button>
             <div className="about1"><p>Guard</p>
         Player designates another player and names a type of card. If that player's hand matches the type of card specified, that player is eliminated from the round. However, Guard cannot be named as the type of card.           )
-        </div>
+        </div></div>
         )
     } 
       else if (mycards[0]==="/static/media/handmaid.9c912d77.jpg") {
           return (
+             <div>
+            <button className="button_card1_use">Use</button>
+                  <button className="button_card1_discard">Discard</button>
             <div className="about1"><p>Handmaid</p>
 Player cannot be affected by any other player's card until the next turn. 
-        </div>
+        </div></div>
         )
     } 
-    else if (mycards[0]==="/static/media/handmaid.9c912d77.jpg") {
-          return (
-            <div className="about1"><p>Handmaid</p>
-    Player cannot be affected by any other player's card until the next turn. 
-        </div>
-        )
-    } 
+
 else if (mycards[0]==="/static/media/king.07e83cb7.jpg") {
           return (
+             <div>
+            <button className="button_card1_use">Use</button>
+                  <button className="button_card1_discard">Discard</button>
             <div className="about1"><p>King</p>
-Player trades hands with any other player.         </div>
+Player trades hands with any other player.         </div></div>
         )
     } 
     else if (mycards[0]==="/static/media/priest.ae71698d.jpg") {
-          return (
+          return ( <div>
+            <button className="button_card1_use">Use</button>
+                  <button className="button_card1_discard">Discard</button>
             <div className="about1"><p>Priest</p>
-Player is allowed to see another player's hand.         </div>
+Player is allowed to see another player's hand.         </div></div>
         )
     } 
         else if (mycards[0]==="/static/media/prince.02c4993a.jpg") {
-          return (
+          return ( <div>
+            <button className="button_card1_use">Use</button>
+                  <button className="button_card1_discard">Discard</button>
             <div className="about1"><p>Prince</p>
-Player can choose any player (including themselves) to discard their hand and draw a new one. If the discarded card is the Princess, the discarding player is eliminated.          </div>
+Player can choose any player (including themselves) to discard their hand and draw a new one. If the discarded card is the Princess, the discarding player is eliminated.          </div></div>
         )
     } 
         else if (mycards[0]==="/static/media/princess.700d28a3.jpg") {
           return (
+             <div>
+            <button className="button_card1_use">Use</button>
+                  <button className="button_card1_discard">Discard</button>
             <div className="about1"><p>Princess</p>
-If a player plays this card for any reason, they are eliminated from the round.          </div>
+If a player plays this card for any reason, they are eliminated from the round.          </div></div>
         )
     } 
 
@@ -230,61 +250,90 @@ If a player plays this card for any reason, they are eliminated from the round. 
             {(() => {
         if (mycards[1]==="/static/media/baron.ce4d41dc.jpg") {
           return (
+            <div>
+            <button className="button_card2_use">Use</button>
+                  <button className="button_card2_discard">Discard</button>
             <div className="about2"><p>BARON</p>
             Player will choose another player and privately compare hands. The player with the lower-strength hand is eliminated from the round. 
-            </div>
+            </div></div>
           )
         } else if (mycards[1]==="/static/media/countess.a48c395a.jpg") {
           return (
+            <div>
+            <button className="button_card2_use">Use</button>
+                  <button className="button_card2_discard">Discard</button>
             <div className="about2"><p>Countess</p>
-          If a player holds both this card and either the King or Prince card, this card must be played immediately.             </div>
+          If a player holds both this card and either the King or Prince card, this card must be played immediately.             </div></div>
           )
         } 
         else if (mycards[1]==="/static/media/guard.b6e3701e.jpg") {
           return (
+            <div>
+            <button className="button_card2_use">Use</button>
+                  <button className="button_card2_discard">Discard</button>
             <div className="about2"><p>Guard</p>
         Player designates another player and names a type of card. If that player's hand matches the type of card specified, that player is eliminated from the round. However, Guard cannot be named as the type of card.           )
-        </div>
+        </div></div>
         )
     } 
       else if (mycards[1]==="/static/media/handmaid.9c912d77.jpg") {
           return (
+            <div>
+            <button className="button_card2_use">Use</button>
+                  <button className="button_card2_discard">Discard</button>
             <div className="about2"><p>Handmaid</p>
 Player cannot be affected by any other player's card until the next turn. 
-        </div>
+        </div></div>
         )
     } 
     else if (mycards[1]==="/static/media/handmaid.9c912d77.jpg") {
           return (
+            <div>
+            <button className="button_card2_use">Use</button>
+                  <button className="button_card2_discard">Discard</button>
             <div className="about2"><p>Handmaid</p>
     Player cannot be affected by any other player's card until the next turn. 
-        </div>
+        </div></div>
         )
     } 
 else if (mycards[1]==="/static/media/king.07e83cb7.jpg") {
           return (
+            <div>
+            <button className="button_card2_use">Use</button>
+                  <button className="button_card2_discard">Discard</button>
             <div className="about2"><p>King</p>
-Player trades hands with any other player.         </div>
+Player trades hands with any other player.         </div></div>
         )
     } 
     else if (mycards[1]==="/static/media/priest.ae71698d.jpg") {
           return (
+            <div>
+            <button className="button_card2_use">Use</button>
+                  <button className="button_card2_discard">Discard</button>
             <div className="about2"><p>Priest</p>
-Player is allowed to see another player's hand.         </div>
+Player is allowed to see another player's hand.         </div></div>
         )
     } 
         else if (mycards[1]==="/static/media/prince.02c4993a.jpg") {
           return (
+            <div>
+            <button className="button_card2_use">Use</button>
+                  <button className="button_card2_discard">Discard</button>
             <div className="about2"><p>Prince</p>
-Player can choose any player (including themselves) to discard their hand and draw a new one. If the discarded card is the Princess, the discarding player is eliminated.          </div>
+Player can choose any player (including themselves) to discard their hand and draw a new one. If the discarded card is the Princess, the discarding player is eliminated.          </div></div>
         )
     } 
         else if (mycards[1]==="/static/media/princess.700d28a3.jpg") {
           return (
+            <div>
+            <button className="button_card2_use">Use</button>
+                  <button className="button_card2_discard">Discard</button>
             <div className="about2"><p>Princess</p>
-If a player plays this card for any reason, they are eliminated from the round.          </div>
+If a player plays this card for any reason, they are eliminated from the round.          </div></div>
         )
     } 
+
+    
 
       })()}
     </div>

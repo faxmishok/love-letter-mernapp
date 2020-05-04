@@ -25,6 +25,30 @@
 
 }
 
+.button_card1_use{
+  position: absolute;
+  top:25vh;
+  left: 20vw;
+}
+
+.button_card1_discard{
+  position: absolute;
+  top:30vh;
+  left: 20vw;
+}
+
+
+.button_card2_use{
+  position: absolute;
+  top:25vh;
+  left: 78vw;
+}
+
+.button_card2_discard{
+  position: absolute;
+  top:30vh;
+  left: 78vw;
+}
 
 .containerrow_mycard {
   display: flex;
