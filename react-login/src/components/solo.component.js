@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import {Launcher} from 'react-chat-window'
 import { Button } from 'semantic-ui-react'
 
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
