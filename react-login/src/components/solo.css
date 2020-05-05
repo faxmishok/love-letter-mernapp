@@ -83,21 +83,38 @@
   color: red;
   position: fixed;
   top: 0vh;
-  left: 45vw;
+  left: 40vw;
 
 }
+
+.word-allcards{
+  color: red;
+  position: fixed;
+  top: 8vh;
+  left: 30vw;
+}
+
+
+.item-discard{
+  color: red;
+  position: fixed;
+  top: 0vh;
+  right: 10vw;
+
+}
+
 .item-bottom {
-  color: green;
+  color: purple;
   position: absolute;
   bottom: 0vh;
-  left: 33.7vw;
+  left: 30vw;
 }
 
 .item-bottom2 {
-  color: green;
+  color: white;
   position: absolute;
   bottom: 0vh;
-  left: 54.8vw
+  left: 53vw
 }
 .item-bottom3{
   color: green;
@@ -110,7 +127,7 @@
   color: blue;
   position: absolute;
   bottom: 0vh;
-  left: 11.6vw;
+  left: 7vw;
 
 }
 

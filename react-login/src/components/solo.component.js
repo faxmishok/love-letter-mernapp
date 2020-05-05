@@ -27,7 +27,7 @@ export default class Solo extends Component {
             rear: [card3],
             bottom2: [card4],
             bottom3: [card5],
-            mycards: [card8,card7],
+            mycards: [card9,card9],
             transition: {
               item: null,
               startTop: 20,
@@ -51,10 +51,10 @@ export default class Solo extends Component {
           
           moveUp = (item, evt) => {
             const listBottom = this.topList.offsetTop + this.topList.clientHeight;
-            const itemTop = evt.target.offsetTop + listBottom;
+            const itemTop = evt.target.offsetTop - listBottom;
             const {top, bottom,rear,bottom2,bottom3, transition } = this.state;
             transition.item = item;
-            transition.startTop = itemTop;
+            transition.startTop = itemTop/4;
             transition.startAnim = false;
             this.setState({
               top: [...top, item],
@@ -120,7 +120,10 @@ export default class Solo extends Component {
             })
             setTimeout(() => this.resetState(), 1);
           }
-
+            use1 = () => {
+              
+          
+    }
 
 
           resetState = () => {
@@ -134,6 +137,13 @@ export default class Solo extends Component {
             return (
             	<div className="bcksolo">
               <div className="container1">
+
+
+
+
+              <div className="word-allcards">
+                      ALL CARDS
+              </div>
                 <div ref={(node) => { this.topList = node; }}>
                   {top.map((item) => {
                     const startTop = transition.item === item ? transition.startTop : 0;
@@ -147,12 +157,16 @@ export default class Solo extends Component {
                         onClick={(evt) => this.moveDown(item, evt)}
                         style={style}
                       >
+                      
                                     <img src={item} width="125"/>
 
                       </div>
                     )
                   })}
                 </div>
+
+
+
 
               <div className="containerrow_mycard">
 
@@ -192,8 +206,8 @@ export default class Solo extends Component {
         else if (mycards[0]==="/static/media/guard.b6e3701e.jpg") {
           return (
              <div>
-            <button className="button_card1_use">Use</button>
-                  <button className="button_card1_discard">Discard</button>
+            <button className="button_card1_use"  onClick={this.use1}>Use</button>
+            <button className="button_card1_discard">Discard</button>
             <div className="about1"><p>Guard</p>
         Player designates another player and names a type of card. If that player's hand matches the type of card specified, that player is eliminated from the round. However, Guard cannot be named as the type of card.           )
         </div></div>
@@ -355,6 +369,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                         onClick={(evt) => this.moveUp(item, evt)}
                         style={style}
                       >
+                        Player2
                         <img src={item} width="125"/>
                       </div>
                     )
@@ -375,6 +390,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                         onClick={(evt) => this.moveDownLeft(item, evt)}
                         style={style}
                       >
+                      Player1
                         <img src={item} width="125" />
                       </div>
                     )
@@ -397,6 +413,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                         onClick={(evt) => this.moveUp2(item, evt)}
                         style={style}
                       >
+                      Player3
                         <img src={item} width="125"/>
                                               </div>
 
@@ -420,6 +437,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                         onClick={(evt) => this.moveUp3(item, evt)}
                         style={style}
                       >
+                      Player4
                         <img src={item} width="125"/>
                       </div>
                     )
