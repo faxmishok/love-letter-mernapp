@@ -20,10 +20,7 @@ import card14 from './cards/princess.jpg';
 export default class Solo extends Component {
           state = {
             deck: [card7,card7,card8,card9,card9,card9,card9,card9,card10,card10,card11,card12,card12,card13,card13,card14],
-            player1: [],
-            player2: [],
-            player3: [],
-            player4: [],
+            player: [[null],[null],[null],[null]],
             top: [card1],
             bottom: [card2],
             rear: [card3],
@@ -40,60 +37,60 @@ export default class Solo extends Component {
             },
             draw : '',
             alreadyDrawn: [],
-            turnNumber: 0
+            turnNumber: -1
           }
 
           startGame = () =>{
             this.draw();
-            this.state.player1[0]=this.state.draw;
+            this.state.player[0][0]=this.state.draw;
             this.draw();
-            this.state.player2[0]=this.state.draw;
+            this.state.player[1][0]=this.state.draw;
             this.draw();
-            this.state.player3[0]=this.state.draw;
+            this.state.player[2][0]=this.state.draw;
             this.draw();
-            this.state.player4[0]=this.state.draw;
+            this.state.player[3][0]=this.state.draw;
 
             console.log("Game started");
             console.log(this.state.alreadyDrawn);
           }
           startTurn = (id,evt) =>{
+            this.state.turnNumber ++;
             id=this.state.turnNumber;
             if (id == 0){
               this.startGame();
             }
             console.log(this.state.turnNumber);
-            const { mycards0,mycards1,player1,player2,player3,player4 } = this.state;
+            const { mycards0,player} = this.state;
               switch (id%4){
                 case 0:
                   this.draw();
-                  player1[1]=this.state.draw;
-                  this.setState({mycards0:player1[0]});
-                  this.setState({mycards1:player1[1]});
+                  player[0][1]=this.state.draw;
+                  this.setState({mycards0:player[0][0]});
+                  this.setState({mycards1:player[0][1]});
                   break;
                 case 1:
                   this.draw();
-                  player2[1]=this.state.draw;
-                  this.setState({mycards0:player2[0]});
-                  this.setState({mycards1:player2[1]});
+                  player[1][1]=this.state.draw;
+                  this.setState({mycards0:player[1][0]});
+                  this.setState({mycards1:player[1][1]});
                   break;
                 case 2:
                   this.draw();
-                  player3[1]=this.state.draw;
-                  this.setState({mycards0:player3[0]});
-                  this.setState({mycards1:player3[1]});
+                  player[2][1]=this.state.draw;
+                  this.setState({mycards0:player[2][0]});
+                  this.setState({mycards1:player[2][1]});
                   break;
                 case 3:
                   this.draw();
-                  player4[1]=this.state.draw;
-                  this.setState({mycards0:player4[0]});
-                  this.setState({mycards1:player4[1]});
+                  player[3][1]=this.state.draw;
+                  this.setState({mycards0:player[3][0]});
+                  this.setState({mycards1:player[3][1]});
                   break;
               }
-              this.state.turnNumber ++;
-                  console.log(this.state.player1);
-                  console.log(this.state.player2);
-                  console.log(this.state.player3);
-                  console.log(this.state.player4);
+                  console.log(this.state.player[0]);
+                  console.log(this.state.player[1]);
+                  console.log(this.state.player[2]);
+                  console.log(this.state.player[3]);
 
           }
 
@@ -215,49 +212,17 @@ export default class Solo extends Component {
             this.setState({transition});
           }
     discard_card= (evt,zero_one) => {
-            var { player1, player2, player3, player4, mycards0,mycards1,turnNumber } = this.state;
-            switch(turnNumber%4){
-              case 1:
-                switch(zero_one){
-                  case 0:
-                    player1[0]=player1[1]
-                    break;
-                  case 1:
-                    break;
-                }
-                player1[1]=null;
+            var { player, mycards0,mycards1,turnNumber } = this.state;
+
+            switch(zero_one){
+            case 0:
+                player[turnNumber%4][0]=player[turnNumber%4][1];
                 break;
-              case 2:    
-                switch(zero_one){
-                  case 0:
-                    player2[0]=player2[1]
-                    break;
-                  case 1:
-                    break;
-                }
-                player2[1]=null;
+            case 1:
                 break;
-              case 3:
-                switch(zero_one){
-                  case 0:
-                    player3[0]=player3[1]
-                    break;
-                  case 1:
-                    break;
-                }
-                player3[1]=null;
-                break;
-              case 0:
-                switch(zero_one){
-                  case 0:
-                    player4[0]=player4[1]
-                    break;
-                  case 1:
-                    break;
-                }
-                player4[1]=null;
-                break;
-            }
+        }
+                  player[turnNumber%4][1]=null;
+
           {(() => {
             if (zero_one===0) {
           mycards0=null;
@@ -265,7 +230,7 @@ export default class Solo extends Component {
                      mycards1=null;
         }
           })()}
-                        this.setState({ player1, player2, player3, player4, mycards0,mycards1,turnNumber })
+                        this.setState({ player, mycards0,mycards1,turnNumber })
 
 
     }
@@ -273,26 +238,26 @@ export default class Solo extends Component {
 
     usePriest_id = (evt,id,zero_one) => { 
 
-            var { rear,bottom2,bottom3,bottom,player1, player2, player3, player4, mycards0,mycards1,turnNumber,showButton } = this.state;
+            var { rear,bottom2,bottom3,bottom,player,mycards0,mycards1,turnNumber,showButton } = this.state;
             var whichPlayer;
             switch(id){
               case 0:
-                whichPlayer = player1[0];
+                whichPlayer = player[0][0];
                 rear[1]=whichPlayer;
                 rear[0]=card6;
                 break;
               case 1:    
-                whichPlayer = player2[0];
+                whichPlayer = player[1][0];
                 bottom[1]=whichPlayer;
                 bottom[0]=card6;
                 break;
               case 2:
-                whichPlayer = player3[0];
+                whichPlayer = player[2][0];
                 bottom2[1]=whichPlayer;
                 bottom2[0]=card6;
                 break;
               case 3:
-                whichPlayer = player4[0];
+                whichPlayer = player[3][0];
                 bottom3[1]=whichPlayer;
                 bottom3[0]=card6;
                 break;
@@ -306,224 +271,54 @@ export default class Solo extends Component {
         }
           })()}
 
-          switch(turnNumber%4){
-              case 1:
-                switch(zero_one){
-                  case 0:
-                    player1[0]=player1[1]
-                    break;
-                  case 1:
-                    break;
-                }
-                player1[1]=null;
+          switch(zero_one){
+            case 0:
+                player[turnNumber%4][0]=player[turnNumber%4][1];
                 break;
-              case 2:    
-                switch(zero_one){
-                  case 0:
-                    player2[0]=player2[1]
-                    break;
-                  case 1:
-                    break;
-                }
-                player2[1]=null;
+                case 1:
                 break;
-              case 3:
-                switch(zero_one){
-                  case 0:
-                    player3[0]=player3[1]
-                    break;
-                  case 1:
-                    break;
-                }
-                player3[1]=null;
-                break;
-              case 0:
-                switch(zero_one){
-                  case 0:
-                    player4[0]=player4[1]
-                    break;
-                  case 1:
-                    break;
-                }
-                player4[1]=null;
-                break;
-            }
-
+        }
+                  player[turnNumber%4][1]=null;
 
                 // bottom[1]=whichPlayer;
                 // bottom[0]=card6;
                 // console.log(bottom);
-              this.setState({ rear,bottom2,bottom3,bottom,player1, player2, player3, player4, mycards0,mycards1 })
+              this.setState({ rear,bottom2,bottom3,bottom,player, mycards0,mycards1 })
               this.setState({showButton : false})
 
      }
      useKing = evt => { var { showButton } = this.state;  this.setState({showButton : true})}
-    useKing_id = (evt,id,zero_one) => { 
+      useKing_id = (evt,id,zero_one) => { 
             var mid =[]
-            var { rear,bottom2,bottom3,bottom,player1, player2, player3, player4, mycards0,mycards1,turnNumber,showButton } = this.state;
+            var { rear,bottom2,bottom3,bottom,player, mycards0,mycards1,turnNumber,showButton } = this.state;
 
-
-              
-
-          switch(turnNumber%4){
-              case 1:
-                switch(zero_one){
-                  case 0:
-                    player1[0]=player1[1];
-                    break;
-                  case 1:
-                    break;
-                }
-                player1[1]=null;
-                switch(id){
-                  case 1:
-                  mid = player1[0];
-                  player1[0]= player2[0];
-                  player2[0]=mid;
-                  break;
-                  case 2:
-                  mid = player1[0];
-                  player1[0]= player3[0];
-                  player3[0]=mid;
-                  break;
-                  case 3:
-                  mid = player1[0];
-                  player1[0]= player4[0];
-                  player4[0]=mid;
-                  break;
-                }
-                break;
-              case 2:    
-                switch(zero_one){
-                  case 0:
-                    player2[0]=player2[1];
-                    break;
-                  case 1:
-                    break;
-                }
-                player2[1]=null;
-
-                switch(id){
-                  case 0:
-                  mid = player2[0];
-                  player2[0]= player1[0];
-                  player3[0]=mid;
-                  break;
-                  case 2:
-                  mid = player2[0];
-                  player2[0]= player3[0];
-                  player3[0]=mid;
-                  break;
-                  case 3:
-                  mid = player2[0];
-                  player2[0]= player3[0];
-                  player3[0]=mid;
-                  break;
-                }
-                break;
-              case 3:
-                switch(zero_one){
-                  case 0:
-                    player3[0]=player3[1];
-                    break;
-                  case 1:
-                    break;
-                }
-                player3[1]=null;
-                 switch(id){
-                  case 0:
-                  mid = player3[0];
-                  player3[0]= player1[0];
-                  player1[0]=mid;
-                  break;
-                  case 1:
-                   mid = player3[0];
-                  player3[0]= player2[0];
-                  player2[0]=mid;
-                  break;
-                  case 3:
-                   mid = player3[0];
-                  player3[0]= player4[0];
-                  player4[0]=mid;
-                  break;
-                }
-                break;
-              case 0:
-                switch(zero_one){
-                  case 0:
-                    player4[0]=player4[1];
-                    break;
-                  case 1:
-                    break;
-                }
-                player4[1]=null;
-                switch(id){
-                  case 0:
-                  mid = player4[0];
-                  player4[0]= player1[0];
-                  player1[0]=mid;
-                  break;
-                  case 1:
-                   mid = player4[0];
-                  player4[0]= player2[0];
-                  player2[0]=mid;
-                  break;
-                  case 2:
-                  mid = player4[0];
-                  player4[0]= player3[0];
-                  player3[0]=mid;
-                  break;
-                }
-                break;
-            }
-           {(() => {
-        if (zero_one===0) {
-          mycards1=null;
-          switch(turnNumber%4)
-          {
-            case 1:
-                        mycards0 = player1[0]
-            break;
-            case 2:
-                        mycards0 = player2[0]
-
-            break;
-            case 3:
-                        mycards0 = player3[0]
-
-            break;
+         switch(zero_one){
             case 0:
-                        mycards0 = player4[0]
-
-            break;
-          }
-        }  else {
-                     mycards0=null;
-          switch(turnNumber%4)
-          {
-            case 1:
-                        mycards1 = player1[0]
-            break;
-            case 2:
-                        mycards1 = player2[0]
-
-            break;
-            case 3:
-                        mycards1 = player3[0]
-
-            break;
-            case 0:
-                        mycards1 = player4[0]
-
-            break;
-          }
+                player[turnNumber%4][0]=player[turnNumber%4][1];
+                break;
+                case 1:
+                break;
         }
-          })()}
+        player[turnNumber%4][1]=null;
 
+        mid = player[turnNumber%4][0]
+        player[turnNumber%4][0] = player[id][0]
+        player[id][0]=mid
+
+        switch(zero_one){
+          case 0:
+            mycards1=null;
+            mycards0 = player[turnNumber%4][0]
+           break;
+          case 1:
+            mycards0 = null;
+            mycards1 = player[turnNumber%4][0]
+           break;
+        }
                 // bottom[1]=whichPlayer;
                 // bottom[0]=card6;
                 // console.log(bottom);
-              this.setState({ rear,bottom2,bottom3,bottom,player1, player2, player3, player4, mycards0,mycards1 })
+              this.setState({ rear,bottom2,bottom3,bottom,player, mycards0,mycards1 })
               this.setState({showButton : false})
 
      }
