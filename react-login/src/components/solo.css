@@ -46,6 +46,43 @@
   left: 7vw;
 
 }
+
+.button_Priest{
+  position: absolute;
+  top: 0vh;
+  right:  0vw;
+}
+.button_Baron{
+  position: absolute;
+  top: 10vh;
+  right: 0vw;
+}
+.button_Handmaid{
+  position: absolute;
+  top: 20vh;
+  right: 0vw;
+}
+.button_Prince{
+  position: absolute;
+  top: 30vh;
+  right:  0vw;
+}
+.button_King{
+  position: absolute;
+  top: 40vh;
+  right:  0vw;
+}
+.button_Countess{
+  position: absolute;
+  top: 50vh;
+  right:  0vw;
+}
+.button_Princess{
+  position: absolute;
+  top: 60vh;
+  right:  0vw;
+}
+
 .button_player2{
     position: absolute;
   bottom: 20vh;

@@ -29,7 +29,8 @@ export default class Solo extends Component {
             mycards0: [],
             mycards1: [],
             showButton:false,
-            setShowButton:false,
+            guard_select_card:false,
+            id_of_card:0,
             transition: {
               item: null,
               startTop: 20,
@@ -423,13 +424,95 @@ useBaron = evt => { var { showButton } = this.state;  this.setState({showButton 
           })()}
                 
               this.setState({ player, mycards0,mycards1 })
-              this.setState({showButton : false})
 
      }
+     useGuard = evt => { var { guard_select_card } = this.state;  this.setState({guard_select_card : true})}
+     useGuard_id_card = (evt,id) =>  { 
+      var { guard_select_card,id_of_card } = this.state; 
+      id_of_card=id 
+      this.setState({ id_of_card }) 
+      this.setState({showButton : true})
+      this.setState({guard_select_card : false})
+
+    }
+    useGuard_id = (evt,id,zero_one) => { 
+       var { player, mycards0,mycards1,turnNumber,showButton,id_of_card } = this.state;
+
+      switch(zero_one){
+            case 0:
+                player[turnNumber%4][0]=player[turnNumber%4][1];
+                break;
+                case 1:
+                break;
+        }
+        player[turnNumber%4][1]=null;
 
 
+        switch(id_of_card){
+          case 0:
+          {(() => {
+            if (player[id][0]===card12) {
+                player[id][0]=null
+        }  
+          })()}
+            break;
+            case 1:
+            {(() => {
+            if (player[id][0]===card7) {
+                player[id][0]=null
+        }  
+          })()}
+            break;
+        case 2:
+            {(() => {
+            if (player[id][0]===card10) {
+                player[id][0]=null
+        }  
+          })()}
+            break;
+        case 3:
+            {(() => {
+            if (player[id][0]===card13) {
+                player[id][0]=null
+        }  
+          })()}
+            break;
+        case 4:
+            {(() => {
+            if (player[id][0]===card11) {
+                player[id][0]=null
+        }  
+          })()}
+            break;
+        case 5:
+            {(() => {
+            if (player[id][0]===card8) {
+                player[id][0]=null
+        }  
+          })()}
+            break;
+            case 6:
+            {(() => {
+            if (player[id][0]===card14) {
+                player[id][0]=null
+        }  
+          })()}
+            break;
+        }
+      {(() => {
+        if (zero_one===0) {
+          mycards0=null;
+        }  else {
+                     mycards1=null;
+        }
+          })()}
+                        this.setState({showButton : false})
+                                      this.setState({ player, mycards0,mycards1 })
+
+
+    }
           render() {
-            let { top,showButton,setShowButton, bottom,rear,bottom2,bottom3,mycards0,mycards1, transition} = this.state
+            let { top,showButton,setShowButton,guard_select_card, bottom,rear,bottom2,bottom3,mycards0,mycards1, transition} = this.state
             return (
               
               <div className="bcksolo">
@@ -481,6 +564,8 @@ useBaron = evt => { var { showButton } = this.state;  this.setState({showButton 
         <button className="button_player4" onClick={evt => this.useBaron_id(evt,3,0)}>Player4</button>
       </div>
     )}
+
+  
             <button className="button_card1_use" onClick={evt => this.useBaron(evt)}>Use</button>
                   <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
 
@@ -501,8 +586,30 @@ useBaron = evt => { var { showButton } = this.state;  this.setState({showButton 
         } 
         else if (mycards0==="/static/media/guard.b6e3701e.jpg") {
           return (
+
              <div>
-            <button className="button_card1_use">Use</button>
+             {showButton && (
+      <div>
+        <button className="button_player1" onClick={evt => this.useGuard_id(evt,0,0)} >Player1</button>
+        <button className="button_player2" onClick={evt => this.useGuard_id(evt,1,0)}>Player2</button>
+        <button className="button_player3" onClick={evt => this.useGuard_id(evt,2,0)}>Player3</button>
+        <button className="button_player4" onClick={evt => this.useGuard_id(evt,3,0)}>Player4</button>
+      </div>
+    )}
+{guard_select_card && (
+      <div>
+        <button className="button_Priest" onClick={evt => this.useGuard_id_card(evt,0)}>Priest</button>
+        <button className="button_Baron" onClick={evt => this.useGuard_id_card(evt,1)}>Baron</button>
+        <button className="button_Handmaid" onClick={evt => this.useGuard_id_card(evt,2)}>Handmaid</button>
+         <button className="button_Prince" onClick={evt => this.useGuard_id_card(evt,3)} >Prince</button>
+        <button className="button_King" onClick={evt => this.useGuard_id_card(evt,4)}>King</button>
+        <button className="button_Countess" onClick={evt => this.useGuard_id_card(evt,5)}>Countess</button>
+        <button  className="button_Princess" onClick={evt => this.useGuard_id_card(evt,6)}>Princess</button>
+      </div>
+
+    )}
+
+            <button className="button_card1_use" onClick={evt => this.useGuard(evt)}>Use</button>
                   <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
             <div className="about1"><p>Guard</p>
         Player designates another player and names a type of card. If that player's hand matches the type of card specified, that player is eliminated from the round. However, Guard cannot be named as the type of card.           )
@@ -609,7 +716,27 @@ If a player plays this card for any reason, they are eliminated from the round. 
         else if (mycards1==="/static/media/guard.b6e3701e.jpg") {
           return (
             <div>
-            <button className="button_card2_use">Use</button>
+            {showButton && (
+      <div>
+        <button className="button_player1" onClick={evt => this.useGuard_id(evt,0,1)} >Player1</button>
+        <button className="button_player2" onClick={evt => this.useGuard_id(evt,1,1)}>Player2</button>
+        <button className="button_player3" onClick={evt => this.useGuard_id(evt,2,1)}>Player3</button>
+        <button className="button_player4" onClick={evt => this.useGuard_id(evt,3,1)}>Player4</button>
+      </div>
+    )}
+{guard_select_card && (
+      <div>
+        <button className="button_Priest" onClick={evt => this.useGuard_id_card(evt,0)}>Priest</button>
+        <button className="button_Baron" onClick={evt => this.useGuard_id_card(evt,1)}>Baron</button>
+        <button className="button_Handmaid" onClick={evt => this.useGuard_id_card(evt,2)}>Handmaid</button>
+         <button className="button_Prince" onClick={evt => this.useGuard_id_card(evt,3)} >Prince</button>
+        <button className="button_King" onClick={evt => this.useGuard_id_card(evt,4)}>King</button>
+        <button className="button_Countess" onClick={evt => this.useGuard_id_card(evt,5)}>Countess</button>
+        <button  className="button_Princess" onClick={evt => this.useGuard_id_card(evt,6)}>Princess</button>
+      </div>
+
+    )}
+            <button className="button_card2_use"  onClick={evt => this.useGuard(evt)}>Use</button>
                   <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
             <div className="about2"><p>Guard</p>
         Player designates another player and names a type of card. If that player's hand matches the type of card specified, that player is eliminated from the round. However, Guard cannot be named as the type of card.           )
