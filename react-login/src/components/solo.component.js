@@ -54,14 +54,23 @@ export default class Solo extends Component {
             console.log(this.state.alreadyDrawn);
           }
           startTurn = (id,evt) =>{
+
             this.state.turnNumber ++;
-            id=this.state.turnNumber;
-            if (id == 0){
+            if (this.state.turnNumber == 0){
               this.startGame();
             }
+                        const { mycards0,player} = this.state;
+            var win = 0;
+        {(() => {
+            while (player[this.state.turnNumber%4][0]===null) {
+            this.state.turnNumber++;
+            win++;
+            if(win===3)
+              console.log("WIN")
+        } 
+          })()}
             console.log(this.state.turnNumber);
-            const { mycards0,player} = this.state;
-              switch (id%4){
+              switch (this.state.turnNumber%4){
                 case 0:
                   this.draw();
                   player[0][1]=this.state.draw;
@@ -213,7 +222,7 @@ export default class Solo extends Component {
           }
     discard_card= (evt,zero_one) => {
             var { player, mycards0,mycards1,turnNumber } = this.state;
-
+            //console.log(turnNumber)
             switch(zero_one){
             case 0:
                 player[turnNumber%4][0]=player[turnNumber%4][1];
@@ -230,7 +239,11 @@ export default class Solo extends Component {
                      mycards1=null;
         }
           })()}
+                        // turnNumber=+1
                         this.setState({ player, mycards0,mycards1,turnNumber })
+                                                // this.startTurn()
+
+
 
 
     }
@@ -280,9 +293,6 @@ export default class Solo extends Component {
         }
                   player[turnNumber%4][1]=null;
 
-                // bottom[1]=whichPlayer;
-                // bottom[0]=card6;
-                // console.log(bottom);
               this.setState({ rear,bottom2,bottom3,bottom,player, mycards0,mycards1 })
               this.setState({showButton : false})
 
@@ -323,6 +333,99 @@ export default class Solo extends Component {
 
      }
 
+useBaron = evt => { var { showButton } = this.state;  this.setState({showButton : true})}
+      useBaron_id = (evt,id,zero_one) => { 
+            var player1_p = 0
+            var player2_p = 0
+            var { player, mycards0,mycards1,turnNumber,showButton } = this.state;
+
+         switch(zero_one){
+            case 0:
+                player[turnNumber%4][0]=player[turnNumber%4][1];
+                break;
+                case 1:
+                break;
+        }
+        player[turnNumber%4][1]=null;
+
+        switch(player[turnNumber%4][0])
+        {
+          case card7:
+            player1_p = 3
+            break;
+            case card8:
+            player1_p = 7
+            break;
+            case card9:
+            player1_p = 1
+            break;
+            case card10:
+            player1_p = 4
+            break;
+            case card11:
+            player1_p = 6
+            break;
+            case card12:
+            player1_p = 2
+            break;
+            case card13:
+            player1_p = 5
+            break;
+            case card14:
+            player1_p = 8
+            break;
+        }
+
+      switch(player[id][0])
+        {
+          case card7:
+            player2_p = 3
+            break;
+            case card8:
+            player2_p = 7
+            break;
+            case card9:
+            player2_p = 1
+            break;
+            case card10:
+            player2_p = 4
+            break;
+            case card11:
+            player2_p = 6
+            break;
+            case card12:
+            player2_p = 2
+            break;
+            case card13:
+            player2_p = 5
+            break;
+            case card14:
+            player2_p = 8
+            break;
+        }
+
+
+    {(() => {
+            if (player1_p<player2_p) {
+            player[turnNumber%4][0]=null
+            mycards1=null;
+            mycards0=null;
+        }  else if(player1_p>player2_p){
+                     player[id][0]=null;
+        }
+          })()}
+      {(() => {
+        if (zero_one===0) {
+          mycards0=null;
+        }  else {
+                     mycards1=null;
+        }
+          })()}
+                
+              this.setState({ player, mycards0,mycards1 })
+              this.setState({showButton : false})
+
+     }
 
 
           render() {
@@ -370,7 +473,15 @@ export default class Solo extends Component {
           return (
 
  <div>
-            <button className="button_card1_use">Use</button>
+ {showButton && (
+      <div>
+        <button className="button_player1" onClick={evt => this.useBaron_id(evt,0,0)} >Player1</button>
+        <button className="button_player2" onClick={evt => this.useBaron_id(evt,1,0)}>Player2</button>
+        <button className="button_player3" onClick={evt => this.useBaron_id(evt,2,0)}>Player3</button>
+        <button className="button_player4" onClick={evt => this.useBaron_id(evt,3,0)}>Player4</button>
+      </div>
+    )}
+            <button className="button_card1_use" onClick={evt => this.useBaron(evt)}>Use</button>
                   <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
 
             <div className="about1"><p>BARON</p>
@@ -472,7 +583,15 @@ If a player plays this card for any reason, they are eliminated from the round. 
         if (mycards1==="/static/media/baron.ce4d41dc.jpg") {
           return (
             <div>
-            <button className="button_card2_use">Use</button>
+            {showButton && (
+      <div>
+        <button className="button_player1" onClick={evt => this.useBaron_id(evt,0,1)} >Player1</button>
+        <button className="button_player2" onClick={evt => this.useBaron_id(evt,1,1)}>Player2</button>
+        <button className="button_player3" onClick={evt => this.useBaron_id(evt,2,1)}>Player3</button>
+        <button className="button_player4" onClick={evt => this.useBaron_id(evt,3,1)}>Player4</button>
+      </div>
+    )}
+            <button className="button_card2_use" onClick={evt => this.useBaron(evt)}>Use</button>
                   <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
             <div className="about2"><p>BARON</p>
             Player will choose another player and privately compare hands. The player with the lower-strength hand is eliminated from the round. 
