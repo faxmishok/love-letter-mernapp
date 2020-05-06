@@ -214,10 +214,64 @@ export default class Solo extends Component {
             transition.startAnim = true;
             this.setState({transition});
           }
+    discard_card= (evt,zero_one) => {
+            var { player1, player2, player3, player4, mycards0,mycards1,turnNumber } = this.state;
+            switch(turnNumber%4){
+              case 1:
+                switch(zero_one){
+                  case 0:
+                    player1[0]=player1[1]
+                    break;
+                  case 1:
+                    break;
+                }
+                player1[1]=null;
+                break;
+              case 2:    
+                switch(zero_one){
+                  case 0:
+                    player2[0]=player2[1]
+                    break;
+                  case 1:
+                    break;
+                }
+                player2[1]=null;
+                break;
+              case 3:
+                switch(zero_one){
+                  case 0:
+                    player3[0]=player3[1]
+                    break;
+                  case 1:
+                    break;
+                }
+                player3[1]=null;
+                break;
+              case 0:
+                switch(zero_one){
+                  case 0:
+                    player4[0]=player4[1]
+                    break;
+                  case 1:
+                    break;
+                }
+                player4[1]=null;
+                break;
+            }
+          {(() => {
+            if (zero_one===0) {
+          mycards0=null;
+        }  else {
+                     mycards1=null;
+        }
+          })()}
+                        this.setState({ player1, player2, player3, player4, mycards0,mycards1,turnNumber })
 
-     usePriest = evt => { var { showButton } = this.state;  this.setState({showButton : true})}
 
-     usePriest_id = (evt,id,zero_one) => { 
+    }
+    usePriest = evt => { var { showButton } = this.state;  this.setState({showButton : true})}
+
+    usePriest_id = (evt,id,zero_one) => { 
 
             var { rear,bottom2,bottom3,bottom,player1, player2, player3, player4, mycards0,mycards1,turnNumber,showButton } = this.state;
             var whichPlayer;
@@ -261,7 +315,7 @@ export default class Solo extends Component {
                   case 1:
                     break;
                 }
-                player1[zero_one]=null;
+                player1[1]=null;
                 break;
               case 2:    
                 switch(zero_one){
@@ -271,7 +325,7 @@ export default class Solo extends Component {
                   case 1:
                     break;
                 }
-                player2[zero_one]=null;
+                player2[1]=null;
                 break;
               case 3:
                 switch(zero_one){
@@ -281,9 +335,9 @@ export default class Solo extends Component {
                   case 1:
                     break;
                 }
-                player3[zero_one]=null;
+                player3[1]=null;
                 break;
-              case 4:
+              case 0:
                 switch(zero_one){
                   case 0:
                     player4[0]=player4[1]
@@ -291,7 +345,7 @@ export default class Solo extends Component {
                   case 1:
                     break;
                 }
-                player4[zero_one]=null;
+                player4[1]=null;
                 break;
             }
 
@@ -351,7 +405,7 @@ export default class Solo extends Component {
 
  <div>
             <button className="button_card1_use">Use</button>
-                  <button className="button_card1_discard">Discard</button>
+                  <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
 
             <div className="about1"><p>BARON</p>
             Player will choose another player and privately compare hands. The player with the lower-strength hand is eliminated from the round. 
@@ -362,7 +416,7 @@ export default class Solo extends Component {
           return (
  <div>
             <button className="button_card1_use">Use</button>
-                  <button className="button_card1_discard">Discard</button>
+                  <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
             <div className="about1"><p>Countess</p>
           If a player holds both this card and either the King or Prince card, this card must be played immediately. 
           </div>            </div>
@@ -372,7 +426,7 @@ export default class Solo extends Component {
           return (
              <div>
             <button className="button_card1_use">Use</button>
-                  <button className="button_card1_discard">Discard</button>
+                  <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
             <div className="about1"><p>Guard</p>
         Player designates another player and names a type of card. If that player's hand matches the type of card specified, that player is eliminated from the round. However, Guard cannot be named as the type of card.           )
         </div></div>
@@ -382,7 +436,7 @@ export default class Solo extends Component {
           return (
              <div>
             <button className="button_card1_use">Use</button>
-                  <button className="button_card1_discard">Discard</button>
+                  <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
             <div className="about1"><p>Handmaid</p>
 Player cannot be affected by any other player's card until the next turn. 
         </div></div>
@@ -393,7 +447,7 @@ else if (mycards0==="/static/media/king.07e83cb7.jpg") {
           return (
              <div>
             <button className="button_card1_use">Use</button>
-                  <button className="button_card1_discard">Discard</button>
+                  <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
             <div className="about1"><p>King</p>
 Player trades hands with any other player.         </div></div>
         )
@@ -412,7 +466,7 @@ Player trades hands with any other player.         </div></div>
     <button className="button_card1_use" onClick={evt => this.usePriest(evt)}>
       Use
     </button>
-    <button className="button_card1_discard">Discard</button>
+    <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
     <div className="about1">
       <p>Priest</p>
       Player is allowed to see another player's hand.
@@ -423,7 +477,7 @@ Player trades hands with any other player.         </div></div>
         else if (mycards0==="/static/media/prince.02c4993a.jpg") {
           return ( <div>
             <button className="button_card1_use">Use</button>
-                  <button className="button_card1_discard">Discard</button>
+                  <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
             <div className="about1"><p>Prince</p>
 Player can choose any player (including themselves) to discard their hand and draw a new one. If the discarded card is the Princess, the discarding player is eliminated.          </div></div>
         )
@@ -432,7 +486,7 @@ Player can choose any player (including themselves) to discard their hand and dr
           return (
              <div>
             <button className="button_card1_use">Use</button>
-                  <button className="button_card1_discard">Discard</button>
+                  <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
             <div className="about1"><p>Princess</p>
 If a player plays this card for any reason, they are eliminated from the round.          </div></div>
         )
@@ -445,7 +499,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
           return (
             <div>
             <button className="button_card2_use">Use</button>
-                  <button className="button_card2_discard">Discard</button>
+                  <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
             <div className="about2"><p>BARON</p>
             Player will choose another player and privately compare hands. The player with the lower-strength hand is eliminated from the round. 
             </div></div>
@@ -454,7 +508,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
           return (
             <div>
             <button className="button_card2_use">Use</button>
-                  <button className="button_card2_discard">Discard</button>
+                  <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
             <div className="about2"><p>Countess</p>
           If a player holds both this card and either the King or Prince card, this card must be played immediately.             </div></div>
           )
@@ -463,7 +517,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
           return (
             <div>
             <button className="button_card2_use">Use</button>
-                  <button className="button_card2_discard">Discard</button>
+                  <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
             <div className="about2"><p>Guard</p>
         Player designates another player and names a type of card. If that player's hand matches the type of card specified, that player is eliminated from the round. However, Guard cannot be named as the type of card.           )
         </div></div>
@@ -473,7 +527,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
           return (
             <div>
             <button className="button_card2_use">Use</button>
-                  <button className="button_card2_discard">Discard</button>
+                  <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
             <div className="about2"><p>Handmaid</p>
 Player cannot be affected by any other player's card until the next turn. 
         </div></div>
@@ -483,7 +537,7 @@ Player cannot be affected by any other player's card until the next turn.
           return (
             <div>
             <button className="button_card2_use">Use</button>
-                  <button className="button_card2_discard">Discard</button>
+                  <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
             <div className="about2"><p>Handmaid</p>
     Player cannot be affected by any other player's card until the next turn. 
         </div></div>
@@ -493,7 +547,7 @@ else if (mycards1==="/static/media/king.07e83cb7.jpg") {
           return (
             <div>
             <button className="button_card2_use">Use</button>
-                  <button className="button_card2_discard">Discard</button>
+                  <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
             <div className="about2"><p>King</p>
 Player trades hands with any other player.         </div></div>
         )
