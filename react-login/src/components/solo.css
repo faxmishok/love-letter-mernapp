@@ -24,7 +24,11 @@
   flex-direction: row;
 
 }
-
+.button_end_turn{
+  position: absolute;
+  top:0vh;
+  left: 0vw;
+}
 .button_card1_use{
   position: absolute;
   top:25vh;
@@ -36,8 +40,27 @@
   top:30vh;
   left: 20vw;
 }
+.button_player1{
+  position: absolute;
+  bottom: 20vh;
+  left: 7vw;
 
-
+}
+.button_player2{
+    position: absolute;
+  bottom: 20vh;
+  left: 30vw;
+}
+.button_player3{
+    position: absolute;
+  bottom: 20vh;
+  left: 53vw
+}
+.button_player4{
+    position: absolute;
+  bottom: 20vh;
+  left: 75.9vw
+}
 .button_card2_use{
   position: absolute;
   top:25vh;
@@ -98,8 +121,8 @@
 .item-discard{
   color: red;
   position: fixed;
-  top: 0vh;
-  right: 10vw;
+  top: 8vh;
+  right: 100vw;
 
 }
 
