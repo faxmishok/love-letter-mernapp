@@ -41,7 +41,6 @@ export default class Solo extends Component {
         guard_select_card: false,
         use_discard_1_0: false,
         id_of_card: 0,
-        id_of_handmaiden_player:5,
         my_turn: [true, true, true, true],
         transition: {
             item: null,
@@ -69,10 +68,17 @@ export default class Solo extends Component {
     startTurn = (id, evt) => {
 
         this.state.turnNumber++;
+
+
+
+
         if (this.state.turnNumber == 0) {
             this.state.my_turn[0] = false
             this.startGame();
         }
+
+
+
         else{
             this.state.my_turn[(this.state.turnNumber-1)%4] = true
             this.state.my_turn[(this.state.turnNumber)%4] = false
@@ -93,21 +99,38 @@ export default class Solo extends Component {
         {
             this.state.my_turn[3] = false
         }
+
+         
+
         const { mycards0, player } = this.state;
         var { use_discard_1_0, my_turn } = this.state;
         this.setState({ use_discard_1_0: true })
         var win = 0;
-        this.setState({ my_turn })
         console.log(my_turn)
-
-        
+        if(player[0][1]===card_handmaid)
+        {
+          this.state.my_turn[0] = false
+        }
+        if(player[1][1]===card_handmaid)
+        {
+          this.state.my_turn[1] = false
+        }
+        if(player[2][1]===card_handmaid)
+        {
+          this.state.my_turn[2] = false
+        }
+        if(player[3][1]===card_handmaid)
+        {
+          this.state.my_turn[3] = false
+        }
+          this.setState({ my_turn })
                 while (player[this.state.turnNumber % 4][0] === null) {
                     this.state.turnNumber++;
                     win++;
                     if (win === 3)
                         alert("YOU WIN")
                 }
-            
+        
         alert("It is " + (this.state.turnNumber % 4 + 1) + " player's turn")
         console.log(this.state.turnNumber);
         switch (this.state.turnNumber % 4) {
@@ -586,7 +609,7 @@ export default class Solo extends Component {
 
     usePrince = evt => {
         var { showButton_prince, player, turnNumber } = this.state; 
-                if (player[turnNumber % 4][0] === card_handmaid || player[turnNumber % 4][1] === card_handmaid) {
+                if (player[turnNumber % 4][0] === card_countess || player[turnNumber % 4][1] === card_countess) {
                     alert("You should play countess")
                 } else {
                     this.setState({ showButton_prince: true })
@@ -651,16 +674,30 @@ export default class Solo extends Component {
     }
 
 
+        useHandmaid_id = (evt,zero_one) => {
+        var { use_discard_1_0, player, mycards0, mycards1, turnNumber} = this.state;
+        var switch_card
+switch (zero_one) {
+            case 0:
+                switch_card = player[turnNumber % 4][0]
+                player[turnNumber % 4][0] = player[turnNumber % 4][1];
+                player[turnNumber % 4][1] = switch_card
+                break;
+            case 1:
+                break;
+        }
 
 
 
+         if (zero_one === 0) {
+                    mycards0 = null;
+                } else {
+                    mycards1 = null;
+                }
+        this.setState({ use_discard_1_0: false })
+        this.setState({ player, mycards0, mycards1, turnNumber })
 
-
-
-
-
-
-
+}
 
 
 
@@ -672,7 +709,7 @@ export default class Solo extends Component {
 
 
     render() {
-        let { my_turn, use_discard_1_0, top, showButton_prince, showButton_baron, showButton_guard, showButton_priest, showButton_king, guard_select_card, bottom, rear, bottom2, bottom3, mycards0, mycards1, transition } = this.state
+        let { my_turn, use_discard_1_0, top,showButton_prince, showButton_baron, showButton_guard, showButton_priest, showButton_king, guard_select_card, bottom, rear, bottom2, bottom3, mycards0, mycards1, transition } = this.state
         return (
 
             <div className="bcksolo">
@@ -799,7 +836,7 @@ export default class Solo extends Component {
              <div>
             {use_discard_1_0 &&(
     <div>
-            <button className="button_card1_use" >Use</button>
+            <button className="button_card1_use" onClick={evt => this.useHandmaid_id(evt,0)} >Use</button>
                   <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
                   </div>
                   )}
@@ -981,7 +1018,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
             <div>
             {use_discard_1_0 &&(
     <div>
-            <button className="button_card2_use">Use</button>
+            <button className="button_card2_use" onClick={evt => this.useHandmaid_id(evt,1)}>Use</button>
                   <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
                   </div>)}
             <div className="about2"><p>Handmaid</p>
