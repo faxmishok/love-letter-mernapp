@@ -32,6 +32,7 @@ export default class Solo extends Component {
             showButton_priest:false,
             showButton_king:false,
             showButton_guard:false,
+            showButton_prince:false,
             guard_select_card:false,
             use_discard_1_0:false,
             id_of_card:0,
@@ -82,7 +83,7 @@ export default class Solo extends Component {
             this.state.turnNumber++;
             win++;
             if(win===3)
-              console.log("WIN")
+              alert("YOU WIN")
         } 
           })()}
           alert("It is " + (this.state.turnNumber%4+1) + " player's turn")
@@ -122,6 +123,8 @@ export default class Solo extends Component {
 
           async draw(){
             const { deck, alreadyDrawn } = this.state;
+            // console.log(deck)
+            console.log(alreadyDrawn)
             var found = false;
             if (alreadyDrawn.length == 16){
               this.setState({draw: card6});
@@ -457,7 +460,7 @@ useBaron = evt => { var { showButton_baron } = this.state;  this.setState({showB
     }
     useGuard_id = (evt,id,zero_one) => { 
        var {use_discard_1_0, player, mycards0,mycards1,turnNumber,showButton,id_of_card } = this.state;
-        this.setState({use_discard_1_0 : false})
+      this.setState({use_discard_1_0 : false})
       switch(zero_one){
             case 0:
                 player[turnNumber%4][0]=player[turnNumber%4][1];
@@ -553,8 +556,83 @@ useBaron = evt => { var { showButton_baron } = this.state;  this.setState({showB
 
 
     }
+
+    usePrince = evt => { var { showButton_prince } = this.state;  this.setState({showButton_prince : true})}
+    usePrince_id = (evt,id,zero_one) => { 
+             var {use_discard_1_0, player, mycards0,mycards1,turnNumber } = this.state;
+        switch(zero_one){
+            case 0:
+                player[turnNumber%4][0]=player[turnNumber%4][1];
+                break;
+                case 1:
+                break;
+        }
+        player[turnNumber%4][1]=null;
+        {(() => {
+        if (zero_one===0) {
+          mycards0=null;
+          
+        }  else {
+                     mycards1=null;
+        }
+          })()}
+        var new_card;
+        this.draw();
+        new_card=this.state.draw;
+        switch(player[id][0])
+        {
+          case card_princess:
+            alert("Player " +(id+1) +" lost")
+            player[id][0] = null
+            break;
+          default:
+            {(() => {
+        if (new_card!==card6) {
+          player[id][0] = new_card
+        }  else {
+                     alert("Nothing happened, few cards in deck")
+        }
+          })()}
+          break;
+        }
+        {(() => {
+        if (id===turnNumber%4 && zero_one==0) {
+          mycards1=player[id][0]
+        } 
+        else if(id===turnNumber%4 && zero_one==0){
+            mycards0=player[id][0]
+        }
+
+          })()}
+
+        this.setState({use_discard_1_0 : false})
+        this.setState({showButton_prince : false})
+        this.setState({player, mycards0,mycards1,turnNumber  })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           render() {
-            let {my_turn,use_discard_1_0, top,showButton_baron,showButton_guard,showButton_priest,showButton_king,guard_select_card, bottom,rear,bottom2,bottom3,mycards0,mycards1, transition} = this.state
+            let {my_turn,use_discard_1_0, top,showButton_prince,showButton_baron,showButton_guard,showButton_priest,showButton_king,guard_select_card, bottom,rear,bottom2,bottom3,mycards0,mycards1, transition} = this.state
             return (
               
               <div className="bcksolo">
@@ -748,10 +826,18 @@ Player trades hands with any other player.         </div></div>
     } 
         else if (mycards0==="/static/media/prince.02c4993a.jpg") {
           return ( <div>
+            {showButton_prince && (
+      <div>
+        <button className="button_player1" onClick={evt => this.usePrince_id(evt,0,0)} >Player1</button>
+        <button className="button_player2" onClick={evt => this.usePrince_id(evt,1,0)}>Player2</button>
+        <button className="button_player3" onClick={evt => this.usePrince_id(evt,2,0)}>Player3</button>
+        <button className="button_player4" onClick={evt => this.usePrince_id(evt,3,0)}>Player4</button>
+      </div>
+    )}
             {use_discard_1_0 &&(
     <div>
 
-            <button className="button_card1_use" >Use</button>
+            <button className="button_card1_use" onClick={evt => this.usePrince(evt)}>Use</button>
                   <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
                   </div>
                   )}
@@ -849,19 +935,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
         </div></div>
         )
     } 
-      else if (mycards1==="/static/media/handmaid.9c912d77.jpg") {
-          return (
-            <div>
-            {use_discard_1_0 &&(
-    <div>
-            <button className="button_card2_use">Use</button>
-                  <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
-                  </div>)}
-            <div className="about2"><p>Handmaid</p>
-Player cannot be affected by any other player's card until the next turn. 
-        </div></div>
-        )
-    } 
+
     else if (mycards1==="/static/media/handmaid.9c912d77.jpg") {
           return (
             <div>
@@ -932,9 +1006,17 @@ Player trades hands with any other player.         </div></div>
         else if (mycards1==="/static/media/prince.02c4993a.jpg") {
           return (
             <div>
+            {showButton_prince && (
+      <div>
+        <button className="button_player1" onClick={evt => this.usePrince_id(evt,0,1)} >Player1</button>
+        <button className="button_player2" onClick={evt => this.usePrince_id(evt,1,1)}>Player2</button>
+        <button className="button_player3" onClick={evt => this.usePrince_id(evt,2,1)}>Player3</button>
+        <button className="button_player4" onClick={evt => this.usePrince_id(evt,3,1)}>Player4</button>
+      </div>
+    )}
             {use_discard_1_0 &&(
     <div>
-            <button className="button_card2_use">Use</button>
+            <button className="button_card2_use" onClick={evt => this.usePrince(evt)}>Use</button>
                   <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
                   </div>)}
             <div className="about2"><p>Prince</p>
