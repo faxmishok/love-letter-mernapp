@@ -319,7 +319,17 @@ export default class Solo extends Component {
               this.setState({showButton_priest : false})
 
      }
-     useKing = evt => { var { showButton_king } = this.state;  this.setState({showButton_king : true})}
+     useKing = evt => { var { showButton_king,player,turnNumber } = this.state;  
+
+     {(() => {
+        if (player[turnNumber%4][0]===card_handmaid || player[turnNumber%4][1]===card_handmaid) {
+          alert("You should play handmaiden")
+        }  else {
+            this.setState({showButton_king : true})
+        }
+          })()}
+
+     }
       useKing_id = (evt,id,zero_one) => { 
             var mid =[]
             var {use_discard_1_0, rear,bottom2,bottom3,bottom,player, mycards0,mycards1,turnNumber,showButton_king } = this.state;
@@ -557,7 +567,20 @@ useBaron = evt => { var { showButton_baron } = this.state;  this.setState({showB
 
     }
 
-    usePrince = evt => { var { showButton_prince } = this.state;  this.setState({showButton_prince : true})}
+    usePrince = evt => { var { showButton_prince,player,turnNumber } = this.state;  
+    {(() => {
+        if (player[turnNumber%4][0]===card_handmaid ||player[turnNumber%4][1]===card_handmaid) {
+          alert("You should play handmaiden")
+        }  else {
+                         this.setState({showButton_prince : true})
+
+        }
+          })()}
+
+
+
+
+  }
     usePrince_id = (evt,id,zero_one) => { 
              var {use_discard_1_0, player, mycards0,mycards1,turnNumber } = this.state;
         switch(zero_one){
@@ -706,7 +729,7 @@ useBaron = evt => { var { showButton_baron } = this.state;  this.setState({showB
  <div>
    {use_discard_1_0 &&(
     <div>
-            <button className="button_card1_use" >Use</button>
+            <button className="button_card1_use" onClick={evt => this.discard_card(evt,0)}>Use</button>
                   <button className="button_card1_discard" onClick={evt => this.discard_card(evt,0)}>Discard</button>
     </div>
 )}
@@ -891,7 +914,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
             <div>
             {use_discard_1_0 &&(
     <div>
-            <button className="button_card2_use">Use</button>
+            <button className="button_card2_use" onClick={evt => this.discard_card(evt,1)}>Use</button>
                   <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
                   </div>)}
             <div className="about2"><p>Countess</p>
