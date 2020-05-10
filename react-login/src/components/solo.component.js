@@ -18,619 +18,636 @@ import card_princess from './cards/princess.jpg';
 
 
 export default class Solo extends Component {
-          state = {
-            deck: [card_baron,card_baron,card_countess,card_guard,card_guard,card_guard,card_guard,card_guard,card_handmaid,card_handmaid,card_king,card_priest,card_priest,card_prince,card_prince,card_princess],
-            player: [[null],[null],[null],[null]],
-            top: [card1],
-            bottom: [card2],
-            rear: [card3],
-            bottom2: [card4],
-            bottom3: [card5],
-            mycards0: [],
-            mycards1: [],
-            showButton_baron:false,
-            showButton_priest:false,
-            showButton_king:false,
-            showButton_guard:false,
-            showButton_prince:false,
-            guard_select_card:false,
-            use_discard_1_0:false,
-            id_of_card:0,
-            my_turn:[true,true,true,true],
-            transition: {
-              item: null,
-              startTop: 20,
-              startAnim: true,
-            },
-            draw : '',
-            alreadyDrawn: [],
-            turnNumber: -1
-          }
+    state = {
+        deck: [card_baron, card_baron, card_countess, card_guard, card_guard, card_guard, card_guard, card_guard, card_handmaid, card_handmaid, card_king, card_priest, card_priest, card_prince, card_prince, card_princess],
+        player: [
+            [null],
+            [null],
+            [null],
+            [null]
+        ],
+        top: [card1],
+        bottom: [card2],
+        rear: [card3],
+        bottom2: [card4],
+        bottom3: [card5],
+        mycards0: [],
+        mycards1: [],
+        showButton_baron: false,
+        showButton_priest: false,
+        showButton_king: false,
+        showButton_guard: false,
+        showButton_prince: false,
+        guard_select_card: false,
+        use_discard_1_0: false,
+        id_of_card: 0,
+        id_of_handmaiden_player:5,
+        my_turn: [true, true, true, true],
+        transition: {
+            item: null,
+            startTop: 20,
+            startAnim: true,
+        },
+        draw: '',
+        alreadyDrawn: [],
+        turnNumber: -1
+    }
 
-          startGame = () =>{
-            this.draw();
-            this.state.player[0][0]=this.state.draw;
-            this.draw();
-            this.state.player[1][0]=this.state.draw;
-            this.draw();
-            this.state.player[2][0]=this.state.draw;
-            this.draw();
-            this.state.player[3][0]=this.state.draw;
+    startGame = () => {
+        this.draw();
+        this.state.player[0][0] = this.state.draw;
+        this.draw();
+        this.state.player[1][0] = this.state.draw;
+        this.draw();
+        this.state.player[2][0] = this.state.draw;
+        this.draw();
+        this.state.player[3][0] = this.state.draw;
 
-            console.log("Game started");
-            console.log(this.state.alreadyDrawn);
-          }
-          startTurn = (id,evt) =>{
+        console.log("Game started");
+        console.log(this.state.alreadyDrawn);
+    }
+    startTurn = (id, evt) => {
 
-            this.state.turnNumber ++;
-            if (this.state.turnNumber == 0){
-              this.startGame();
-            }
-                        const { mycards0,player} = this.state;
-                        var{use_discard_1_0,my_turn} = this.state;
-                        this.setState({use_discard_1_0 : true})
-            var win = 0;
-            my_turn[0] = true
-            my_turn[1] = true
-            my_turn[2] = true
-            my_turn[3] = true
-            my_turn[this.state.turnNumber%4] = false
-            this.setState({my_turn})
-            console.log(my_turn)
+        this.state.turnNumber++;
+        if (this.state.turnNumber == 0) {
+            this.state.my_turn[0] = false
+            this.startGame();
+        }
+        else{
+            this.state.my_turn[(this.state.turnNumber-1)%4] = true
+            this.state.my_turn[(this.state.turnNumber)%4] = false
+        }
+        if(this.state.player[0][0]==null)
+        {
+            this.state.my_turn[0] = false
+        }
+        if(this.state.player[1][0]==null)
+        {
+            this.state.my_turn[1] = false
+        }
+        if(this.state.player[2][0]==null)
+        {
+            this.state.my_turn[2] = false
+        }
+        if(this.state.player[3][0]==null)
+        {
+            this.state.my_turn[3] = false
+        }
+        const { mycards0, player } = this.state;
+        var { use_discard_1_0, my_turn } = this.state;
+        this.setState({ use_discard_1_0: true })
+        var win = 0;
+        this.setState({ my_turn })
+        console.log(my_turn)
 
-        {(() => {
-            while (player[this.state.turnNumber%4][0]===null) {
-            this.state.turnNumber++;
-            win++;
-            if(win===3)
-              alert("YOU WIN")
-        } 
-          })()}
-          alert("It is " + (this.state.turnNumber%4+1) + " player's turn")
-            console.log(this.state.turnNumber);
-              switch (this.state.turnNumber%4){
-                case 0:
-                  this.draw();
-                  player[0][1]=this.state.draw;
-                  this.setState({mycards0:player[0][0]});
-                  this.setState({mycards1:player[0][1]});
-                  break;
-                case 1:
-                  this.draw();
-                  player[1][1]=this.state.draw;
-                  this.setState({mycards0:player[1][0]});
-                  this.setState({mycards1:player[1][1]});
-                  break;
-                case 2:
-                  this.draw();
-                  player[2][1]=this.state.draw;
-                  this.setState({mycards0:player[2][0]});
-                  this.setState({mycards1:player[2][1]});
-                  break;
-                case 3:
-                  this.draw();
-                  player[3][1]=this.state.draw;
-                  this.setState({mycards0:player[3][0]});
-                  this.setState({mycards1:player[3][1]});
-                  break;
-              }
-                  console.log(this.state.player[0]);
-                  console.log(this.state.player[1]);
-                  console.log(this.state.player[2]);
-                  console.log(this.state.player[3]);
+        
+                while (player[this.state.turnNumber % 4][0] === null) {
+                    this.state.turnNumber++;
+                    win++;
+                    if (win === 3)
+                        alert("YOU WIN")
+                }
+            
+        alert("It is " + (this.state.turnNumber % 4 + 1) + " player's turn")
+        console.log(this.state.turnNumber);
+        switch (this.state.turnNumber % 4) {
+            case 0:
+                this.draw();
+                player[0][1] = this.state.draw;
+                this.setState({ mycards0: player[0][0] });
+                this.setState({ mycards1: player[0][1] });
+                break;
+            case 1:
+                this.draw();
+                player[1][1] = this.state.draw;
+                this.setState({ mycards0: player[1][0] });
+                this.setState({ mycards1: player[1][1] });
+                break;
+            case 2:
+                this.draw();
+                player[2][1] = this.state.draw;
+                this.setState({ mycards0: player[2][0] });
+                this.setState({ mycards1: player[2][1] });
+                break;
+            case 3:
+                this.draw();
+                player[3][1] = this.state.draw;
+                this.setState({ mycards0: player[3][0] });
+                this.setState({ mycards1: player[3][1] });
+                break;
+        }
+        console.log(this.state.player[0]);
+        console.log(this.state.player[1]);
+        console.log(this.state.player[2]);
+        console.log(this.state.player[3]);
 
-          }
+    }
 
-          async draw(){
-            const { deck, alreadyDrawn } = this.state;
-            // console.log(deck)
-            console.log(alreadyDrawn)
-            var found = false;
-            if (alreadyDrawn.length == 16){
-              this.setState({draw: card6});
-              return
-            }
-            while(1){
+    async draw() {
+        const { deck, alreadyDrawn } = this.state;
+        // console.log(deck)
+        console.log(alreadyDrawn)
+        var found = false;
+        if (alreadyDrawn.length == 16) {
+            this.setState({ draw: card6 });
+            return
+        }
+        while (1) {
             found = false;
             const n = Math.floor(16 * Math.random());
-            for( var i = 0; i < alreadyDrawn.length+1; i++ ) {
-              if ( alreadyDrawn[i] === n ) {
-                found = true;
+            for (var i = 0; i < alreadyDrawn.length + 1; i++) {
+                if (alreadyDrawn[i] === n) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found === false) {
+                this.state.draw = deck[n];
+                alreadyDrawn[alreadyDrawn.length] = n;
                 break;
-              }
             }
-            if(found === false){
-              this.state.draw = deck[n];
-              alreadyDrawn[alreadyDrawn.length] = n;
-              break;
-            }
-          }
-          
-          }
-          moveDown = (item, evt) => {
-            const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
-            const itemTop = (evt.target.offsetTop - listBottom) + this.topList.offsetTop;
-            const { top, bottom,rear,bottom2,bottom3, transition } = this.state;
-            transition.item = item;
-            this.draw();
-            transition.startTop = itemTop/5;
-            transition.startAnim = false;
-            this.setState({
-              top: top.filter(x => x !== item),
-              rear: [...rear, item]
-            })
-            setTimeout(() => this.resetState(), 1);
-          }
-          
-          moveUp = (item, evt) => {
-            const listBottom = this.topList.offsetTop + this.topList.clientHeight;
-            const itemTop = evt.target.offsetTop - listBottom;
-            const {top, bottom,rear,bottom2,bottom3, transition } = this.state;
-            transition.item = item;
-            transition.startTop = itemTop;
-            transition.startAnim = false;
-            this.setState({
-              top: [...top, item],
-              bottom: bottom.filter(x => x !== item),
-              transition,
-            })
-            setTimeout(() => this.resetState(), 1);
-          }
+        }
 
-          moveDownLeft = (item, evt) => {
-            const listDownlLeft = this.topList.offsetTop + this.topList.clientHeight;
-            const itemTop = evt.target.offsetTop - listDownlLeft;
-            const { top, bottom,rear,bottom2,bottom3, transition  } = this.state;
-            transition.item = item;
-            transition.startTop = itemTop/4;
-            transition.startAnim = false;
-            this.setState({
-              top: [...top, item],
-              rear: rear.filter(x => x !== item),
-              transition,
-            })
-            setTimeout(() => this.resetState(), 1);
-          }
-          moveUp2 = (item, evt) => {
-            const listBottom2 = this.topList.offsetTop + this.topList.clientHeight;
-            const itemTop = evt.target.offsetTop - listBottom2;
-            const { top, bottom,rear,bottom2,bottom3, transition  } = this.state;
-            transition.item = item;
-            transition.startTop = itemTop/4;
-            transition.startAnim = false;
-            this.setState({
-              top: [...top, item],
-              bottom2: bottom2.filter(x => x !== item),
-              transition,
-            })
-            setTimeout(() => this.resetState(), 1);
-          }
-          moveUp3 = (item, evt) => {
-            const listBottom3 = this.topList.offsetTop + this.topList.clientHeight;
-            const itemTop = evt.target.offsetTop - listBottom3;
-            const { top, bottom,rear,bottom2,bottom3, transition } = this.state;
-            transition.item = item;
-            transition.startTop = itemTop/4;
-            transition.startAnim = false;
-            this.setState({
-              top: [...top, item],
-              bottom3: bottom3.filter(x => x !== item),
-              transition,
-            })
-            setTimeout(() => this.resetState(), 1);
-          }
+    }
+    moveDown = (item, evt) => {
+        const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
+        const itemTop = (evt.target.offsetTop - listBottom) + this.topList.offsetTop;
+        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+        transition.item = item;
+        this.draw();
+        transition.startTop = itemTop / 5;
+        transition.startAnim = false;
+        this.setState({
+            top: top.filter(x => x !== item),
+            rear: [...rear, item]
+        })
+        setTimeout(() => this.resetState(), 1);
+    }
 
-          delete = (item, evt) => {
-            const listBottom3 = this.topList.offsetTop + this.topList.clientHeight;
-            const itemTop = evt.target.offsetTop - listBottom3;
-            const { top, bottom,rear,bottom2,bottom3,mycards, transition } = this.state;
-            transition.item = false;
-            transition.startTop = false;
-            transition.startAnim = false;
-            this.setState({
-              mycards: mycards.filter(x => x !== item),
-              transition,
-            })
-            setTimeout(() => this.resetState(), 1);
-          }
+    moveUp = (item, evt) => {
+        const listBottom = this.topList.offsetTop + this.topList.clientHeight;
+        const itemTop = evt.target.offsetTop - listBottom;
+        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+        transition.item = item;
+        transition.startTop = itemTop;
+        transition.startAnim = false;
+        this.setState({
+            top: [...top, item],
+            bottom: bottom.filter(x => x !== item),
+            transition,
+        })
+        setTimeout(() => this.resetState(), 1);
+    }
+
+    moveDownLeft = (item, evt) => {
+        const listDownlLeft = this.topList.offsetTop + this.topList.clientHeight;
+        const itemTop = evt.target.offsetTop - listDownlLeft;
+        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+        transition.item = item;
+        transition.startTop = itemTop / 4;
+        transition.startAnim = false;
+        this.setState({
+            top: [...top, item],
+            rear: rear.filter(x => x !== item),
+            transition,
+        })
+        setTimeout(() => this.resetState(), 1);
+    }
+    moveUp2 = (item, evt) => {
+        const listBottom2 = this.topList.offsetTop + this.topList.clientHeight;
+        const itemTop = evt.target.offsetTop - listBottom2;
+        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+        transition.item = item;
+        transition.startTop = itemTop / 4;
+        transition.startAnim = false;
+        this.setState({
+            top: [...top, item],
+            bottom2: bottom2.filter(x => x !== item),
+            transition,
+        })
+        setTimeout(() => this.resetState(), 1);
+    }
+    moveUp3 = (item, evt) => {
+        const listBottom3 = this.topList.offsetTop + this.topList.clientHeight;
+        const itemTop = evt.target.offsetTop - listBottom3;
+        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+        transition.item = item;
+        transition.startTop = itemTop / 4;
+        transition.startAnim = false;
+        this.setState({
+            top: [...top, item],
+            bottom3: bottom3.filter(x => x !== item),
+            transition,
+        })
+        setTimeout(() => this.resetState(), 1);
+    }
+
+    delete = (item, evt) => {
+        const listBottom3 = this.topList.offsetTop + this.topList.clientHeight;
+        const itemTop = evt.target.offsetTop - listBottom3;
+        const { top, bottom, rear, bottom2, bottom3, mycards, transition } = this.state;
+        transition.item = false;
+        transition.startTop = false;
+        transition.startAnim = false;
+        this.setState({
+            mycards: mycards.filter(x => x !== item),
+            transition,
+        })
+        setTimeout(() => this.resetState(), 1);
+    }
 
 
-          resetState = () => {
-            const { transition } = this.state;
-            transition.startAnim = true;
-            this.setState({transition});
-          }
-    discard_card= (evt,zero_one) => {
-            var {use_discard_1_0, player, mycards0,mycards1,turnNumber } = this.state;
-            this.setState({use_discard_1_0 : false})
-            //console.log(turnNumber)
-            switch(zero_one){
+    resetState = () => {
+        const { transition } = this.state;
+        transition.startAnim = true;
+        this.setState({ transition });
+    }
+    discard_card = (evt, zero_one) => {
+        var { use_discard_1_0, player, mycards0, mycards1, turnNumber } = this.state;
+        this.setState({ use_discard_1_0: false })
+        //console.log(turnNumber)
+        switch (zero_one) {
             case 0:
-                player[turnNumber%4][0]=player[turnNumber%4][1];
+                player[turnNumber % 4][0] = player[turnNumber % 4][1];
                 break;
             case 1:
                 break;
         }
-                  player[turnNumber%4][1]=null;
+        player[turnNumber % 4][1] = null;
 
-          {(() => {
-            if (zero_one===0) {
-          mycards0=null;
-        }  else {
-                     mycards1=null;
-        }
-          })()}
-                        // turnNumber=+1
-                        this.setState({ player, mycards0,mycards1,turnNumber })
-                                                // this.startTurn()
+        
+                if (zero_one === 0) {
+                    mycards0 = null;
+                } else {
+                    mycards1 = null;
+                }
+           
+        // turnNumber=+1
+        this.setState({ player, mycards0, mycards1, turnNumber })
+        // this.startTurn()
 
 
 
 
     }
-    usePriest = evt => { var { showButton_priest } = this.state;  this.setState({showButton_priest : true})}
+    usePriest = evt => { var { showButton_priest } = this.state;
+        this.setState({ showButton_priest: true }) }
 
-    usePriest_id = (evt,id,zero_one) => { 
+    usePriest_id = (evt, id, zero_one) => {
 
-            var { use_discard_1_0,rear,bottom2,bottom3,bottom,player,mycards0,mycards1,turnNumber,showButton_priest } = this.state;
-            var whichPlayer;
-            this.setState({use_discard_1_0 : false})
-            switch(id){
-              case 0:
+        var { use_discard_1_0, rear, bottom2, bottom3, bottom, player, mycards0, mycards1, turnNumber, showButton_priest } = this.state;
+        var whichPlayer;
+        this.setState({ use_discard_1_0: false })
+        switch (id) {
+            case 0:
                 whichPlayer = player[0][0];
-                rear[1]=whichPlayer;
-                rear[0]=card6;
+                rear[1] = whichPlayer;
+                rear[0] = card6;
                 break;
-              case 1:    
-                whichPlayer = player[1][0];
-                bottom[1]=whichPlayer;
-                bottom[0]=card6;
-                break;
-              case 2:
-                whichPlayer = player[2][0];
-                bottom2[1]=whichPlayer;
-                bottom2[0]=card6;
-                break;
-              case 3:
-                whichPlayer = player[3][0];
-                bottom3[1]=whichPlayer;
-                bottom3[0]=card6;
-                break;
-            }
-
-               {(() => {
-        if (zero_one===0) {
-          mycards0=null;
-        }  else {
-                     mycards1=null;
-        }
-          })()}
-
-          switch(zero_one){
-            case 0:
-                player[turnNumber%4][0]=player[turnNumber%4][1];
-                break;
-                case 1:
-                break;
-        }
-                  player[turnNumber%4][1]=null;
-
-              this.setState({ rear,bottom2,bottom3,bottom,player, mycards0,mycards1 })
-              this.setState({showButton_priest : false})
-
-     }
-     useKing = evt => { var { showButton_king,player,turnNumber } = this.state;  
-
-     {(() => {
-        if (player[turnNumber%4][0]===card_handmaid || player[turnNumber%4][1]===card_handmaid) {
-          alert("You should play handmaiden")
-        }  else {
-            this.setState({showButton_king : true})
-        }
-          })()}
-
-     }
-      useKing_id = (evt,id,zero_one) => { 
-            var mid =[]
-            var {use_discard_1_0, rear,bottom2,bottom3,bottom,player, mycards0,mycards1,turnNumber,showButton_king } = this.state;
-            this.setState({use_discard_1_0 : false})
-         switch(zero_one){
-            case 0:
-                player[turnNumber%4][0]=player[turnNumber%4][1];
-                break;
-                case 1:
-                break;
-        }
-        player[turnNumber%4][1]=null;
-
-        mid = player[turnNumber%4][0]
-        player[turnNumber%4][0] = player[id][0]
-        player[id][0]=mid
-
-        switch(zero_one){
-          case 0:
-            mycards1=null;
-            mycards0 = player[turnNumber%4][0]
-           break;
-          case 1:
-            mycards0 = null;
-            mycards1 = player[turnNumber%4][0]
-           break;
-        }
-                // bottom[1]=whichPlayer;
-                // bottom[0]=card6;
-                // console.log(bottom);
-              this.setState({ rear,bottom2,bottom3,bottom,player, mycards0,mycards1 })
-              this.setState({showButton_king : false})
-
-     }
-
-useBaron = evt => { var { showButton_baron } = this.state;  this.setState({showButton_baron : true})}
-      useBaron_id = (evt,id,zero_one) => { 
-            var player1_p = 0
-            var player2_p = 0
-            var { use_discard_1_0,player, mycards0,mycards1,turnNumber,showButton_baron } = this.state;
-            this.setState({use_discard_1_0 : false})
-         switch(zero_one){
-            case 0:
-                player[turnNumber%4][0]=player[turnNumber%4][1];
-                break;
-                case 1:
-                break;
-        }
-        player[turnNumber%4][1]=null;
-
-        switch(player[turnNumber%4][0])
-        {
-          case card_baron:
-            player1_p = 3
-            break;
-            case card_countess:
-            player1_p = 7
-            break;
-            case card_guard:
-            player1_p = 1
-            break;
-            case card_handmaid:
-            player1_p = 4
-            break;
-            case card_king:
-            player1_p = 6
-            break;
-            case card_priest:
-            player1_p = 2
-            break;
-            case card_prince:
-            player1_p = 5
-            break;
-            case card_princess:
-            player1_p = 8
-            break;
-        }
-
-      switch(player[id][0])
-        {
-          case card_baron:
-            player2_p = 3
-            break;
-            case card_countess:
-            player2_p = 7
-            break;
-            case card_guard:
-            player2_p = 1
-            break;
-            case card_handmaid:
-            player2_p = 4
-            break;
-            case card_king:
-            player2_p = 6
-            break;
-            case card_priest:
-            player2_p = 2
-            break;
-            case card_prince:
-            player2_p = 5
-            break;
-            case card_princess:
-            player2_p = 8
-            break;
-        }
-
-
-    {(() => {
-            if (player1_p<player2_p) {
-            player[turnNumber%4][0]=null
-            mycards1=null;
-            mycards0=null;
-            alert("Player " +(turnNumber%4+1) +" lost")
-        }  else if(player1_p>player2_p){
-                     player[id][0]=null;
-                      alert("Player " +(id+1) +" lost")
-        }
-          })()}
-      {(() => {
-        if (zero_one===0) {
-          mycards0=null;
-        }  else {
-                     mycards1=null;
-        }
-          })()}
-                      this.setState({showButton_baron : true})
-              this.setState({ player, mycards0,mycards1 })
-
-     }
-     useGuard = evt => { var { guard_select_card } = this.state;  this.setState({guard_select_card : true})}
-     useGuard_id_card = (evt,id) =>  { 
-      var { showButton_guard,guard_select_card,id_of_card } = this.state; 
-      id_of_card=id 
-      this.setState({ id_of_card }) 
-      this.setState({showButton_guard : true})
-      this.setState({guard_select_card : false})
-
-    }
-    useGuard_id = (evt,id,zero_one) => { 
-       var {use_discard_1_0, player, mycards0,mycards1,turnNumber,showButton,id_of_card } = this.state;
-      this.setState({use_discard_1_0 : false})
-      switch(zero_one){
-            case 0:
-                player[turnNumber%4][0]=player[turnNumber%4][1];
-                break;
-                case 1:
-                break;
-        }
-        player[turnNumber%4][1]=null;
-
-
-        switch(id_of_card){
-          case 0:
-          {(() => {
-            if (player[id][0]===card_priest) {
-                player[id][0]=null
-                alert("Player " +(id+1) +" lost")
-        }  
-        else
-              alert("You missed")
-          })()}
-            break;
             case 1:
-            {(() => {
-            if (player[id][0]===card_baron) {
-                player[id][0]=null
-                alert("Player " +(id+1) +" lost")
-        }  
-        else
-              alert("You missed")
-          })()}
-            break;
-        case 2:
-            {(() => {
-            if (player[id][0]===card_handmaid) {
-                player[id][0]=null
-                alert("Player " +(id+1) +" lost")
-        }  
-        else
-              alert("You missed")
-          })()}
-            break;
-        case 3:
-            {(() => {
-            if (player[id][0]===card_prince) {
-                player[id][0]=null
-                alert("Player " +(id+1) +" lost")
-        }  
-        else
-              alert("You missed")
-          })()}
-            break;
-        case 4:
-            {(() => {
-            if (player[id][0]===card_king) {
-                player[id][0]=null
-                alert("Player " +(id+1) +" lost")
-        }  
-        else
-              alert("You missed")
-          })()}
-            break;
-        case 5:
-            {(() => {
-            if (player[id][0]===card_countess) {
-                player[id][0]=null
-                alert("Player " +(id+1) +" lost")
-        }  
-        else
-              alert("You missed")
-          })()}
-            break;
-            case 6:
-            {(() => {
-            if (player[id][0]===card_princess) {
-                player[id][0]=null
-                alert("Player " +(id+1) +" lost")
-        }  
-          else
-              alert("You missed")
-          })()}
-            break;
+                whichPlayer = player[1][0];
+                bottom[1] = whichPlayer;
+                bottom[0] = card6;
+                break;
+            case 2:
+                whichPlayer = player[2][0];
+                bottom2[1] = whichPlayer;
+                bottom2[0] = card6;
+                break;
+            case 3:
+                whichPlayer = player[3][0];
+                bottom3[1] = whichPlayer;
+                bottom3[0] = card6;
+                break;
+        }
 
+        
+                if (zero_one === 0) {
+                    mycards0 = null;
+                } else {
+                    mycards1 = null;
+                }
+        
+
+        switch (zero_one) {
+            case 0:
+                player[turnNumber % 4][0] = player[turnNumber % 4][1];
+                break;
+            case 1:
+                break;
         }
-      {(() => {
-        if (zero_one===0) {
-          mycards0=null;
-        }  else {
-                     mycards1=null;
+        player[turnNumber % 4][1] = null;
+
+        this.setState({ rear, bottom2, bottom3, bottom, player, mycards0, mycards1 })
+        this.setState({ showButton_priest: false })
+
+    }
+    useKing = evt => {
+        var { showButton_king, player, turnNumber } = this.state;
+
+        {
+            (() => {
+                if (player[turnNumber % 4][0] === card_countess || player[turnNumber % 4][1] === card_countess) {
+                    alert("You should play countess")
+                } else {
+                    this.setState({ showButton_king: true })
+                }
+            })()
         }
-          })()}
-                        this.setState({showButton_guard : false})
-                                      this.setState({ player, mycards0,mycards1 })
+
+    }
+    useKing_id = (evt, id, zero_one) => {
+        var mid = []
+        var { use_discard_1_0, rear, bottom2, bottom3, bottom, player, mycards0, mycards1, turnNumber, showButton_king } = this.state;
+        this.setState({ use_discard_1_0: false })
+        switch (zero_one) {
+            case 0:
+                player[turnNumber % 4][0] = player[turnNumber % 4][1];
+                break;
+            case 1:
+                break;
+        }
+        player[turnNumber % 4][1] = null;
+
+        mid = player[turnNumber % 4][0]
+        player[turnNumber % 4][0] = player[id][0]
+        player[id][0] = mid
+
+        switch (zero_one) {
+            case 0:
+                mycards1 = null;
+                mycards0 = player[turnNumber % 4][0]
+                break;
+            case 1:
+                mycards0 = null;
+                mycards1 = player[turnNumber % 4][0]
+                break;
+        }
+        // bottom[1]=whichPlayer;
+        // bottom[0]=card6;
+        // console.log(bottom);
+        this.setState({ rear, bottom2, bottom3, bottom, player, mycards0, mycards1 })
+        this.setState({ showButton_king: false })
+
+    }
+
+    useBaron = evt => { var { showButton_baron } = this.state;
+        this.setState({ showButton_baron: true }) }
+    useBaron_id = (evt, id, zero_one) => {
+        var player1_p = 0
+        var player2_p = 0
+        var { use_discard_1_0, player, mycards0, mycards1, turnNumber, showButton_baron } = this.state;
+        this.setState({ use_discard_1_0: false })
+        switch (zero_one) {
+            case 0:
+                player[turnNumber % 4][0] = player[turnNumber % 4][1];
+                break;
+            case 1:
+                break;
+        }
+        player[turnNumber % 4][1] = null;
+
+        switch (player[turnNumber % 4][0]) {
+            case card_baron:
+                player1_p = 3
+                break;
+            case card_countess:
+                player1_p = 7
+                break;
+            case card_guard:
+                player1_p = 1
+                break;
+            case card_handmaid:
+                player1_p = 4
+                break;
+            case card_king:
+                player1_p = 6
+                break;
+            case card_priest:
+                player1_p = 2
+                break;
+            case card_prince:
+                player1_p = 5
+                break;
+            case card_princess:
+                player1_p = 8
+                break;
+        }
+
+        switch (player[id][0]) {
+            case card_baron:
+                player2_p = 3
+                break;
+            case card_countess:
+                player2_p = 7
+                break;
+            case card_guard:
+                player2_p = 1
+                break;
+            case card_handmaid:
+                player2_p = 4
+                break;
+            case card_king:
+                player2_p = 6
+                break;
+            case card_priest:
+                player2_p = 2
+                break;
+            case card_prince:
+                player2_p = 5
+                break;
+            case card_princess:
+                player2_p = 8
+                break;
+        }
+
+
+        
+                if (player1_p < player2_p) {
+                    player[turnNumber % 4][0] = null
+                    mycards1 = null;
+                    mycards0 = null;
+                    alert("Player " + (turnNumber % 4 + 1) + " lost")
+                } else if (player1_p > player2_p) {
+                    player[id][0] = null;
+                    alert("Player " + (id + 1) + " lost")
+                }
+                         
+                if (zero_one === 0) {
+                    mycards0 = null;
+                } else {
+                    mycards1 = null;
+                }
+           
+        this.setState({ showButton_baron: true })
+        this.setState({ player, mycards0, mycards1 })
+
+    }
+    useGuard = evt => { var { guard_select_card } = this.state;
+        this.setState({ guard_select_card: true }) }
+    useGuard_id_card = (evt, id) => {
+        var { showButton_guard, guard_select_card, id_of_card } = this.state;
+        id_of_card = id
+        this.setState({ id_of_card })
+        this.setState({ showButton_guard: true })
+        this.setState({ guard_select_card: false })
+
+    }
+    useGuard_id = (evt, id, zero_one) => {
+        var { use_discard_1_0, player, mycards0, mycards1, turnNumber, showButton, id_of_card } = this.state;
+        this.setState({ use_discard_1_0: false })
+        switch (zero_one) {
+            case 0:
+                player[turnNumber % 4][0] = player[turnNumber % 4][1];
+                break;
+            case 1:
+                break;
+        }
+        player[turnNumber % 4][1] = null;
+
+
+        switch (id_of_card) {
+            case 0:
+                
+                        if (player[id][0] === card_priest) {
+                            player[id][0] = null
+                            alert("Player " + (id + 1) + " lost")
+                        } else
+                            alert("You missed")
+                    
+                break;
+            case 1:
+                
+                        if (player[id][0] === card_baron) {
+                            player[id][0] = null
+                            alert("Player " + (id + 1) + " lost")
+                        } else
+                            alert("You missed")
+                    
+                break;
+            case 2:
+                
+                        if (player[id][0] === card_handmaid) {
+                            player[id][0] = null
+                            alert("Player " + (id + 1) + " lost")
+                        } else
+                            alert("You missed")
+                    
+                break;
+            case 3:
+                
+                        if (player[id][0] === card_prince) {
+                            player[id][0] = null
+                            alert("Player " + (id + 1) + " lost")
+                        } else
+                            alert("You missed")
+                    
+                break;
+            case 4:
+                
+                        if (player[id][0] === card_king) {
+                            player[id][0] = null
+                            alert("Player " + (id + 1) + " lost")
+                        } else
+                            alert("You missed")
+                    
+                break;
+            case 5:
+                
+                        if (player[id][0] === card_countess) {
+                            player[id][0] = null
+                            alert("Player " + (id + 1) + " lost")
+                        } else
+                            alert("You missed")
+                    
+                break;
+            case 6:
+                
+                        if (player[id][0] === card_princess) {
+                            player[id][0] = null
+                            alert("Player " + (id + 1) + " lost")
+                        } else
+                            alert("You missed")
+                    
+                break;
+
+        } 
+                if (zero_one === 0) {
+                    mycards0 = null;
+                } else {
+                    mycards1 = null;
+                }
+            
+        this.setState({ showButton_guard: false })
+        this.setState({ player, mycards0, mycards1 })
 
 
     }
 
-    usePrince = evt => { var { showButton_prince,player,turnNumber } = this.state;  
-    {(() => {
-        if (player[turnNumber%4][0]===card_handmaid ||player[turnNumber%4][1]===card_handmaid) {
-          alert("You should play handmaiden")
-        }  else {
-                         this.setState({showButton_prince : true})
+    usePrince = evt => {
+        var { showButton_prince, player, turnNumber } = this.state; 
+                if (player[turnNumber % 4][0] === card_handmaid || player[turnNumber % 4][1] === card_handmaid) {
+                    alert("You should play countess")
+                } else {
+                    this.setState({ showButton_prince: true })
 
-        }
-          })()}
-
-
+                }
+           
 
 
-  }
-    usePrince_id = (evt,id,zero_one) => { 
-             var {use_discard_1_0, player, mycards0,mycards1,turnNumber } = this.state;
-        switch(zero_one){
+
+
+    }
+    usePrince_id = (evt, id, zero_one) => {
+        var { use_discard_1_0, player, mycards0, mycards1, turnNumber } = this.state;
+        switch (zero_one) {
             case 0:
-                player[turnNumber%4][0]=player[turnNumber%4][1];
+                player[turnNumber % 4][0] = player[turnNumber % 4][1];
                 break;
-                case 1:
+            case 1:
                 break;
         }
-        player[turnNumber%4][1]=null;
-        {(() => {
-        if (zero_one===0) {
-          mycards0=null;
-          
-        }  else {
-                     mycards1=null;
+        player[turnNumber % 4][1] = null; {
+            (() => {
+                if (zero_one === 0) {
+                    mycards0 = null;
+
+                } else {
+                    mycards1 = null;
+                }
+            })()
         }
-          })()}
         var new_card;
         this.draw();
-        new_card=this.state.draw;
-        switch(player[id][0])
-        {
-          case card_princess:
-            alert("Player " +(id+1) +" lost")
-            player[id][0] = null
-            break;
-          default:
-            {(() => {
-        if (new_card!==card6) {
-          player[id][0] = new_card
-        }  else {
-                     alert("Nothing happened, few cards in deck")
-        }
-          })()}
-          break;
-        }
-        {(() => {
-        if (id===turnNumber%4 && zero_one==0) {
-          mycards1=player[id][0]
+        new_card = this.state.draw;
+        switch (player[id][0]) {
+            case card_princess:
+                alert("Player " + (id + 1) + " lost")
+                player[id][0] = null
+                break;
+            default:
+                {
+                    (() => {
+                        if (new_card !== card6) {
+                            player[id][0] = new_card
+                        } else {
+                            alert("Nothing happened, few cards in deck")
+                        }
+                    })()
+                }
+                break;
         } 
-        else if(id===turnNumber%4 && zero_one==0){
-            mycards0=player[id][0]
-        }
+                if (id === turnNumber % 4 && zero_one == 0) {
+                    mycards1 = player[id][0]
+                } else if (id === turnNumber % 4 && zero_one == 0) {
+                    mycards0 = player[id][0]
+                }
 
-          })()}
+           
 
-        this.setState({use_discard_1_0 : false})
-        this.setState({showButton_prince : false})
-        this.setState({player, mycards0,mycards1,turnNumber  })
+        this.setState({ use_discard_1_0: false })
+        this.setState({ showButton_prince: false })
+        this.setState({ player, mycards0, mycards1, turnNumber })
     }
 
 
@@ -654,11 +671,11 @@ useBaron = evt => { var { showButton_baron } = this.state;  this.setState({showB
 
 
 
-          render() {
-            let {my_turn,use_discard_1_0, top,showButton_prince,showButton_baron,showButton_guard,showButton_priest,showButton_king,guard_select_card, bottom,rear,bottom2,bottom3,mycards0,mycards1, transition} = this.state
-            return (
-              
-              <div className="bcksolo">
+    render() {
+        let { my_turn, use_discard_1_0, top, showButton_prince, showButton_baron, showButton_guard, showButton_priest, showButton_king, guard_select_card, bottom, rear, bottom2, bottom3, mycards0, mycards1, transition } = this.state
+        return (
+
+            <div className="bcksolo">
 
               <div className="container1">
               {!use_discard_1_0 &&(
@@ -1159,7 +1176,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
 
 
               </div>
-             
-            )
-          }
+
+        )
+    }
 }
