@@ -72,7 +72,7 @@ export default class Solo extends Component {
 
 
 
-        if (this.state.turnNumber == 0) {
+        if (this.state.turnNumber === 0) {
             this.state.my_turn[0] = false
             this.startGame();
         }
@@ -699,8 +699,19 @@ switch (zero_one) {
 
 }
 
+        usePrincess_id = (evt,zero_one) => {
+        var { use_discard_1_0, player, mycards0, mycards1, turnNumber} = this.state;
+        mycards1 = null
+        mycards0 = null
+        player[turnNumber%4][0] = null
+        player[turnNumber%4][1] = null
+        alert("Player " + (turnNumber%4+1) + " lost")
 
 
+        this.setState({ use_discard_1_0: false })
+        this.setState({ player, mycards0, mycards1, turnNumber })
+
+}
 
 
 
@@ -927,7 +938,7 @@ Player can choose any player (including themselves) to discard their hand and dr
              <div>
             {use_discard_1_0 &&(
     <div>
-            <button className="button_card1_use" >Use</button>
+            <button className="button_card1_use" onClick={evt => this.usePrincess_id(evt,0)}>Use</button>
                   </div>
                   )}
             <div className="about1"><p>Princess</p>
@@ -1105,7 +1116,7 @@ Player can choose any player (including themselves) to discard their hand and dr
             <div>
             {use_discard_1_0 &&(
     <div>
-            <button className="button_card2_use">Use</button>
+            <button className="button_card2_use" onClick={evt => this.usePrincess_id(evt,1)}>Use</button>
             </div>)}
             <div className="about2"><p>Princess</p>
 If a player plays this card for any reason, they are eliminated from the round.          </div></div>
