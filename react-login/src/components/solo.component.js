@@ -502,7 +502,7 @@ export default class Solo extends Component {
                     mycards1 = null;
                 }
            
-        this.setState({ showButton_baron: true })
+        this.setState({ showButton_baron: false })
         this.setState({ player, mycards0, mycards1 })
 
     }
@@ -739,7 +739,7 @@ switch (zero_one) {
                     return (
                       <div 
                         className={`item item-top ${animClass}`}
-                        onClick={(evt) => this.moveDown(item, evt)}
+                        //onClick={(evt) => this.moveDown(item, evt)}
                         style={style}
                       >
                                     <img src={item} width="125"/>
@@ -1142,7 +1142,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     return (
                       <div 
                         className={`item item-bottom ${animClass}`}
-                        onClick={(evt) => this.moveUp(item, evt)}
+                        //onClick={(evt) => this.moveUp(item, evt)}
                         style={style}
                       >
                         <img src={item} width="125"/>
@@ -1162,7 +1162,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     return (
                       <div 
                         className={`item item-rear ${animClass}`}
-                        onClick={(evt) => this.moveDownLeft(item, evt)}
+                        //onClick={(evt) => this.moveDownLeft(item, evt)}
                         style={style}
                       >
                         <img src={item} width="125" />
@@ -1184,7 +1184,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     return (
                       <div 
                         className={`item item-bottom2 ${animClass}`}
-                        onClick={(evt) => this.moveUp2(item, evt)}
+                        //onClick={(evt) => this.moveUp2(item, evt)}
                         style={style}
                       >
                         <img src={item} width="125"/>
@@ -1207,7 +1207,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     return (
                       <div 
                         className={`item item-bottom3 ${animClass}`}
-                        onClick={(evt) => this.moveUp3(item, evt)}
+                        //onClick={(evt) => this.moveUp3(item, evt)}
                         style={style}
                       >
                         <img src={item} width="125"/>
