@@ -257,7 +257,7 @@ export default class Solo extends Component {
             top: top.filter(x => x !== item),
             rear: [...rear, item]
         })
-        setTimeout(() => this.resetState(), 1);
+        setTimeout(() => this.resetState(), 0.1);
     }
 
     moveDown1 = (item) => {
@@ -271,7 +271,7 @@ export default class Solo extends Component {
             top: top.filter(x => x !== item),
             bottom: [...bottom, item]
         })
-        setTimeout(() => this.resetState(), 1);
+        setTimeout(() => this.resetState(), 0.1);
     }
     moveDown2 = (item) => {
         const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
@@ -284,7 +284,7 @@ export default class Solo extends Component {
             top: top.filter(x => x !== item),
             bottom2: [...bottom2, item]
         })
-        setTimeout(() => this.resetState(), 1);
+        setTimeout(() => this.resetState(), 0.1);
     }
     moveDown3 = (item) => {
         const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
@@ -297,7 +297,7 @@ export default class Solo extends Component {
             top: top.filter(x => x !== item),
             bottom3: [...bottom3, item]
         })
-        setTimeout(() => this.resetState(), 1);
+        setTimeout(() => this.resetState(), 0.1);
     }
     moveUp = (item, evt) => {
         const listBottom = this.topList.offsetTop + this.topList.clientHeight;
