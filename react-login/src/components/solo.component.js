@@ -2,12 +2,23 @@ import React, { Component } from "react";
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './solo.css';
 // import card1 from './backcard/card1.jpg';
-import card2 from './backcard/card2.jpg';
-import card3 from './backcard/card3.jpg';
-import card4 from './backcard/card4.jpg';
-import card5 from './backcard/card5.jpg';
-import card6 from './backcard/card6.jpg';
 import card1 from './backcard/bgcard1.png';
+import card2 from './backcard/bgcard2.png';
+import card3 from './backcard/bgcard3.png';
+import card4 from './backcard/bgcard4.png';
+import card5 from './backcard/bgcard5.png';
+import card6 from './backcard/bgcard6.png';
+import card7 from './backcard/bgcard7.png';
+import card8 from './backcard/bgcard8.png';
+import card9 from './backcard/bgcard9.png';
+import card10 from './backcard/bgcard10.png';
+import card11 from './backcard/bgcard11.png';
+import card12 from './backcard/bgcard12.png';
+import card13 from './backcard/bgcard13.png';
+import card14 from './backcard/bgcard14.png';
+import card15 from './backcard/bgcard15.png';
+import card16 from './backcard/bgcard16.png';
+
 
 // import card_baron from './cards/baron.jpg';
 // import card_countess from './cards/countess.jpg';
@@ -18,14 +29,14 @@ import card1 from './backcard/bgcard1.png';
 // import card_prince from './cards/prince.jpg';
 // import card_princess from './cards/princess.jpg';
 
-import card_baron from './ALLCARDS/3-BARON.png';
-import card_countess from './ALLCARDS/7-COUNTESS.png';
-import card_guard from './ALLCARDS/1-GUARD.png';
-import card_handmaid from './ALLCARDS/4-HANDMAIDEN.png';
-import card_king from './ALLCARDS/6-KING.png';
-import card_priest from './ALLCARDS/2-PRIEST.png';
-import card_prince from './ALLCARDS/5-PRINCE.png';
-import card_princess from './ALLCARDS/8-PRINCESS.png';
+import card_baron from './GoT/3-BARON.png';
+import card_countess from './GoT/7-COUNTESS.png';
+import card_guard from './GoT/1-GUARD.png';
+import card_handmaid from './GoT/4-HANDMAIDEN.png';
+import card_king from './GoT/6-KING.png';
+import card_priest from './GoT/2-PRIEST.png';
+import card_prince from './GoT/5-PRINCE.png';
+import card_princess from './GoT/8-PRINCESS.png';
 export default class Solo extends Component {
     state = {
         deck: [card_baron, card_baron, card_countess, card_guard, card_guard, card_guard, card_guard, card_guard, card_handmaid, card_handmaid, card_king, card_priest, card_priest, card_prince, card_prince, card_princess],
@@ -35,13 +46,13 @@ export default class Solo extends Component {
             [null],
             [null]
         ],
-        top: [card1],
-        bottom: [card1],
-        rear: [card1],
-        bottom2: [card1],
-        bottom3: [card1],
-        mycards0: [card1],
-        mycards1: [card1],
+        top: [card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12,card13,card14,card15,card16],
+        bottom: [null],
+        rear: [null],
+        bottom2: [null],
+        bottom3: [null],
+        mycards0: [card6],
+        mycards1: [card6],
         showButton_baron: false,
         showButton_priest: false,
         showButton_king: false,
@@ -50,6 +61,7 @@ export default class Solo extends Component {
         guard_select_card: false,
         use_discard_1_0: false,
         id_of_card: 0,
+        global_counter: 0,
         my_turn: [true, true, true, true],
         transition: {
             item: null,
@@ -72,6 +84,7 @@ export default class Solo extends Component {
         this.state.player[3][0] = this.state.draw;
 
         console.log("Game started");
+        this.moveDown(card6)
         console.log(this.state.alreadyDrawn);
     }
     startTurn = (id, evt) => {
@@ -82,6 +95,7 @@ export default class Solo extends Component {
 
 
         if (this.state.turnNumber === 0) {
+
             this.state.my_turn[0] = false
             this.startGame();
         }
@@ -141,27 +155,32 @@ export default class Solo extends Component {
                 }
         
         alert("It is " + (this.state.turnNumber % 4 + 1) + " player's turn")
+
         console.log(this.state.turnNumber);
         switch (this.state.turnNumber % 4) {
             case 0:
+                this.moveDown(this.state.top[this.state.global_counter])
                 this.draw();
                 player[0][1] = this.state.draw;
                 this.setState({ mycards0: player[0][0] });
                 this.setState({ mycards1: player[0][1] });
                 break;
             case 1:
+                this.moveDown1(this.state.top[this.state.global_counter])
                 this.draw();
                 player[1][1] = this.state.draw;
                 this.setState({ mycards0: player[1][0] });
                 this.setState({ mycards1: player[1][1] });
                 break;
             case 2:
+                this.moveDown2(this.state.top[this.state.global_counter])
                 this.draw();
                 player[2][1] = this.state.draw;
                 this.setState({ mycards0: player[2][0] });
                 this.setState({ mycards1: player[2][1] });
                 break;
             case 3:
+                this.moveDown3(this.state.top[this.state.global_counter])
                 this.draw();
                 player[3][1] = this.state.draw;
                 this.setState({ mycards0: player[3][0] });
@@ -201,9 +220,9 @@ export default class Solo extends Component {
         }
 
     }
-    moveDown = (item, evt) => {
+    moveDown = (item) => {
         const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
-        const itemTop = (evt.target.offsetTop - listBottom) + this.topList.offsetTop;
+        const itemTop =  - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
         transition.item = item;
         this.draw();
@@ -216,6 +235,48 @@ export default class Solo extends Component {
         setTimeout(() => this.resetState(), 1);
     }
 
+    moveDown1 = (item) => {
+        const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
+        const itemTop =  - listBottom + this.topList.offsetTop;
+        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+        transition.item = item;
+        this.draw();
+        transition.startTop = itemTop / 5;
+        transition.startAnim = false;
+        this.setState({
+            top: top.filter(x => x !== item),
+            bottom: [...bottom, item]
+        })
+        setTimeout(() => this.resetState(), 1);
+    }
+    moveDown2 = (item) => {
+        const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
+        const itemTop =  - listBottom + this.topList.offsetTop;
+        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+        transition.item = item;
+        this.draw();
+        transition.startTop = itemTop / 5;
+        transition.startAnim = false;
+        this.setState({
+            top: top.filter(x => x !== item),
+            bottom2: [...bottom2, item]
+        })
+        setTimeout(() => this.resetState(), 1);
+    }
+    moveDown3 = (item) => {
+        const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
+        const itemTop =  - listBottom + this.topList.offsetTop;
+        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+        transition.item = item;
+        this.draw();
+        transition.startTop = itemTop / 5;
+        transition.startAnim = false;
+        this.setState({
+            top: top.filter(x => x !== item),
+            bottom3: [...bottom3, item]
+        })
+        setTimeout(() => this.resetState(), 1);
+    }
     moveUp = (item, evt) => {
         const listBottom = this.topList.offsetTop + this.topList.clientHeight;
         const itemTop = evt.target.offsetTop - listBottom;
@@ -770,7 +831,7 @@ switch (zero_one) {
 
     <div>
       {(() => {
-        if (mycards0==="/static/media/3-BARON.821590c6.png") {
+        if (mycards0==="/static/media/3-BARON.c352baaf.png") {
           return (
 
  <div>
@@ -798,7 +859,7 @@ switch (zero_one) {
             </div>
       </div>
           )
-        } else if (mycards0==="/static/media/7-COUNTESS.3b4aad8a.png") {
+        } else if (mycards0==="/static/media/7-COUNTESS.7b52ed75.png") {
           return (
  <div>
    {use_discard_1_0 &&(
@@ -812,7 +873,7 @@ switch (zero_one) {
           </div>            </div>
           )
         } 
-        else if (mycards0==="/static/media/1-GUARD.a7145efb.png") {
+        else if (mycards0==="/static/media/1-GUARD.043c90b5.png") {
           return (
 
              <div>
@@ -851,7 +912,7 @@ switch (zero_one) {
         </div></div>
         )
     } 
-      else if (mycards0==="/static/media/4-HANDMAIDEN.58cecd0a.png") {
+      else if (mycards0==="/static/media/4-HANDMAIDEN.b7c7dd14.png") {
           return (
              <div>
             {use_discard_1_0 &&(
@@ -866,7 +927,7 @@ Player cannot be affected by any other player's card until the next turn.
         )
     } 
 
-else if (mycards0==="/static/media/6-KING.151bfc36.png") {
+else if (mycards0==="/static/media/6-KING.7b12aa98.png") {
           return (
              <div>
              {showButton_king && (
@@ -891,7 +952,7 @@ else if (mycards0==="/static/media/6-KING.151bfc36.png") {
 Player trades hands with any other player.         </div></div>
         )
     } 
-    else if (mycards0==="/static/media/2-PRIEST.bb510602.png") {
+    else if (mycards0==="/static/media/2-PRIEST.0f58e345.png") {
           return ( 
 <div>
     {showButton_priest && (
@@ -921,7 +982,7 @@ Player trades hands with any other player.         </div></div>
 </div>
 ) 
     } 
-        else if (mycards0==="/static/media/5-PRINCE.68d95796.png") {
+        else if (mycards0==="/static/media/5-PRINCE.5a99cdae.png") {
           return ( <div>
             {showButton_prince && (
       <div>
@@ -942,7 +1003,7 @@ Player trades hands with any other player.         </div></div>
 Player can choose any player (including themselves) to discard their hand and draw a new one. If the discarded card is the Princess, the discarding player is eliminated.          </div></div>
         )
     } 
-        else if (mycards0==="/static/media/8-PRINCESS.5aaf9cd7.png") {
+        else if (mycards0==="/static/media/8-PRINCESS.c09eb978.png") {
           return (
              <div>
             {use_discard_1_0 &&(
@@ -958,7 +1019,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
       })()}
 
             {(() => {
-        if (mycards1==="/static/media/3-BARON.821590c6.png") {
+        if (mycards1==="/static/media/3-BARON.c352baaf.png") {
           return (
             <div>
             {showButton_baron && (
@@ -983,7 +1044,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
             Player will choose another player and privately compare hands. The player with the lower-strength hand is eliminated from the round. 
             </div></div>
           )
-        } else if (mycards1==="/static/media/7-COUNTESS.3b4aad8a.png") {
+        } else if (mycards1==="/static/media/7-COUNTESS.7b52ed75.png") {
           return (
             <div>
             {use_discard_1_0 &&(
@@ -995,7 +1056,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
           If a player holds both this card and either the King or Prince card, this card must be played immediately.             </div></div>
           )
         } 
-        else if (mycards1==="/static/media/1-GUARD.a7145efb.png") {
+        else if (mycards1==="/static/media/1-GUARD.043c90b5.png") {
           return (
             <div>
             {showButton_guard && (
@@ -1033,7 +1094,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
         )
     } 
 
-    else if (mycards1==="/static/media/4-HANDMAIDEN.58cecd0a.png") {
+    else if (mycards1==="/static/media/4-HANDMAIDEN.b7c7dd14.png") {
           return (
             <div>
             {use_discard_1_0 &&(
@@ -1046,7 +1107,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
         </div></div>
         )
     } 
-else if (mycards1==="/static/media/6-KING.151bfc36.png") {
+else if (mycards1==="/static/media/6-KING.7b12aa98.png") {
           return (
             <div>
             {showButton_king && (
@@ -1070,7 +1131,7 @@ else if (mycards1==="/static/media/6-KING.151bfc36.png") {
 Player trades hands with any other player.         </div></div>
         )
     } 
-    else if (mycards1==="/static/media/2-PRIEST.bb510602.png") {
+    else if (mycards1==="/static/media/2-PRIEST.0f58e345.png") {
               return ( 
 <div>
     {showButton_priest && (
@@ -1100,7 +1161,7 @@ Player trades hands with any other player.         </div></div>
 </div>
 ) 
     } 
-        else if (mycards1==="/static/media/5-PRINCE.68d95796.png") {
+        else if (mycards1==="/static/media/5-PRINCE.5a99cdae.png") {
           return (
             <div>
             {showButton_prince && (
@@ -1120,7 +1181,7 @@ Player trades hands with any other player.         </div></div>
 Player can choose any player (including themselves) to discard their hand and draw a new one. If the discarded card is the Princess, the discarding player is eliminated.          </div></div>
         )
     } 
-        else if (mycards1==="/static/media/8-PRINCESS.5aaf9cd7.png") {
+        else if (mycards1==="/static/media/8-PRINCESS.c09eb978.png") {
           return (
             <div>
             {use_discard_1_0 &&(
