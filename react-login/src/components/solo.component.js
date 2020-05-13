@@ -1,22 +1,31 @@
 import React, { Component } from "react";
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './solo.css';
-import card1 from './backcard/card1.jpg';
+// import card1 from './backcard/card1.jpg';
 import card2 from './backcard/card2.jpg';
 import card3 from './backcard/card3.jpg';
 import card4 from './backcard/card4.jpg';
 import card5 from './backcard/card5.jpg';
 import card6 from './backcard/card6.jpg';
-import card_baron from './cards/baron.jpg';
-import card_countess from './cards/countess.jpg';
-import card_guard from './cards/guard.jpg';
-import card_handmaid from './cards/handmaid.jpg';
-import card_king from './cards/king.jpg';
-import card_priest from './cards/priest.jpg';
-import card_prince from './cards/prince.jpg';
-import card_princess from './cards/princess.jpg';
+import card1 from './backcard/bgcard1.png';
 
+// import card_baron from './cards/baron.jpg';
+// import card_countess from './cards/countess.jpg';
+// import card_guard from './cards/guard.jpg';
+// import card_handmaid from './cards/handmaid.jpg';
+// import card_king from './cards/king.jpg';
+// import card_priest from './cards/priest.jpg';
+// import card_prince from './cards/prince.jpg';
+// import card_princess from './cards/princess.jpg';
 
+import card_baron from './ALLCARDS/3-BARON.png';
+import card_countess from './ALLCARDS/7-COUNTESS.png';
+import card_guard from './ALLCARDS/1-GUARD.png';
+import card_handmaid from './ALLCARDS/4-HANDMAIDEN.png';
+import card_king from './ALLCARDS/6-KING.png';
+import card_priest from './ALLCARDS/2-PRIEST.png';
+import card_prince from './ALLCARDS/5-PRINCE.png';
+import card_princess from './ALLCARDS/8-PRINCESS.png';
 export default class Solo extends Component {
     state = {
         deck: [card_baron, card_baron, card_countess, card_guard, card_guard, card_guard, card_guard, card_guard, card_handmaid, card_handmaid, card_king, card_priest, card_priest, card_prince, card_prince, card_princess],
@@ -27,12 +36,12 @@ export default class Solo extends Component {
             [null]
         ],
         top: [card1],
-        bottom: [card2],
-        rear: [card3],
-        bottom2: [card4],
-        bottom3: [card5],
-        mycards0: [],
-        mycards1: [],
+        bottom: [card1],
+        rear: [card1],
+        bottom2: [card1],
+        bottom3: [card1],
+        mycards0: [card1],
+        mycards1: [card1],
         showButton_baron: false,
         showButton_priest: false,
         showButton_king: false,
@@ -724,11 +733,11 @@ switch (zero_one) {
         return (
 
             <div className="bcksolo">
-
+            {!use_discard_1_0 &&(
+              <button className="button_next_turn" onClick={this.startTurn}>NEXT TURN</button>
+            )}
               <div className="container1">
-              {!use_discard_1_0 &&(
-              <button className="down" onClick={this.startTurn}>Turn</button>
-)}
+              
                 <div ref={(node) => { this.topList = node; }}>
                   {top.map((item) => {
                     const startTop = transition.item === item ? transition.startTop : 0;
@@ -761,7 +770,7 @@ switch (zero_one) {
 
     <div>
       {(() => {
-        if (mycards0==="/static/media/baron.ce4d41dc.jpg") {
+        if (mycards0==="/static/media/3-BARON.821590c6.png") {
           return (
 
  <div>
@@ -789,7 +798,7 @@ switch (zero_one) {
             </div>
       </div>
           )
-        } else if (mycards0==="/static/media/countess.a48c395a.jpg") {
+        } else if (mycards0==="/static/media/7-COUNTESS.3b4aad8a.png") {
           return (
  <div>
    {use_discard_1_0 &&(
@@ -803,7 +812,7 @@ switch (zero_one) {
           </div>            </div>
           )
         } 
-        else if (mycards0==="/static/media/guard.b6e3701e.jpg") {
+        else if (mycards0==="/static/media/1-GUARD.a7145efb.png") {
           return (
 
              <div>
@@ -838,11 +847,11 @@ switch (zero_one) {
                   </div>
                   )}
             <div className="about1"><p>Guard</p>
-        Player designates another player and names a type of card. If that player's hand matches the type of card specified, that player is eliminated from the round. However, Guard cannot be named as the type of card.           )
+        Player designates another player and names a type of card. If that player's hand matches the type of card specified, that player is eliminated from the round. However, Guard cannot be named as the type of card.         
         </div></div>
         )
     } 
-      else if (mycards0==="/static/media/handmaid.9c912d77.jpg") {
+      else if (mycards0==="/static/media/4-HANDMAIDEN.58cecd0a.png") {
           return (
              <div>
             {use_discard_1_0 &&(
@@ -857,7 +866,7 @@ Player cannot be affected by any other player's card until the next turn.
         )
     } 
 
-else if (mycards0==="/static/media/king.07e83cb7.jpg") {
+else if (mycards0==="/static/media/6-KING.151bfc36.png") {
           return (
              <div>
              {showButton_king && (
@@ -882,7 +891,7 @@ else if (mycards0==="/static/media/king.07e83cb7.jpg") {
 Player trades hands with any other player.         </div></div>
         )
     } 
-    else if (mycards0==="/static/media/priest.ae71698d.jpg") {
+    else if (mycards0==="/static/media/2-PRIEST.bb510602.png") {
           return ( 
 <div>
     {showButton_priest && (
@@ -912,7 +921,7 @@ Player trades hands with any other player.         </div></div>
 </div>
 ) 
     } 
-        else if (mycards0==="/static/media/prince.02c4993a.jpg") {
+        else if (mycards0==="/static/media/5-PRINCE.68d95796.png") {
           return ( <div>
             {showButton_prince && (
       <div>
@@ -933,7 +942,7 @@ Player trades hands with any other player.         </div></div>
 Player can choose any player (including themselves) to discard their hand and draw a new one. If the discarded card is the Princess, the discarding player is eliminated.          </div></div>
         )
     } 
-        else if (mycards0==="/static/media/princess.700d28a3.jpg") {
+        else if (mycards0==="/static/media/8-PRINCESS.5aaf9cd7.png") {
           return (
              <div>
             {use_discard_1_0 &&(
@@ -949,7 +958,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
       })()}
 
             {(() => {
-        if (mycards1==="/static/media/baron.ce4d41dc.jpg") {
+        if (mycards1==="/static/media/3-BARON.821590c6.png") {
           return (
             <div>
             {showButton_baron && (
@@ -974,7 +983,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
             Player will choose another player and privately compare hands. The player with the lower-strength hand is eliminated from the round. 
             </div></div>
           )
-        } else if (mycards1==="/static/media/countess.a48c395a.jpg") {
+        } else if (mycards1==="/static/media/7-COUNTESS.3b4aad8a.png") {
           return (
             <div>
             {use_discard_1_0 &&(
@@ -986,7 +995,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
           If a player holds both this card and either the King or Prince card, this card must be played immediately.             </div></div>
           )
         } 
-        else if (mycards1==="/static/media/guard.b6e3701e.jpg") {
+        else if (mycards1==="/static/media/1-GUARD.a7145efb.png") {
           return (
             <div>
             {showButton_guard && (
@@ -1019,12 +1028,12 @@ If a player plays this card for any reason, they are eliminated from the round. 
                   <button className="button_card2_discard" onClick={evt => this.discard_card(evt,1)}>Discard</button>
                   </div>)}
             <div className="about2"><p>Guard</p>
-        Player designates another player and names a type of card. If that player's hand matches the type of card specified, that player is eliminated from the round. However, Guard cannot be named as the type of card.           )
+        Player designates another player and names a type of card. If that player's hand matches the type of card specified, that player is eliminated from the round. However, Guard cannot be named as the type of card.    
         </div></div>
         )
     } 
 
-    else if (mycards1==="/static/media/handmaid.9c912d77.jpg") {
+    else if (mycards1==="/static/media/4-HANDMAIDEN.58cecd0a.png") {
           return (
             <div>
             {use_discard_1_0 &&(
@@ -1037,7 +1046,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
         </div></div>
         )
     } 
-else if (mycards1==="/static/media/king.07e83cb7.jpg") {
+else if (mycards1==="/static/media/6-KING.151bfc36.png") {
           return (
             <div>
             {showButton_king && (
@@ -1061,7 +1070,7 @@ else if (mycards1==="/static/media/king.07e83cb7.jpg") {
 Player trades hands with any other player.         </div></div>
         )
     } 
-    else if (mycards1==="/static/media/priest.ae71698d.jpg") {
+    else if (mycards1==="/static/media/2-PRIEST.bb510602.png") {
               return ( 
 <div>
     {showButton_priest && (
@@ -1091,7 +1100,7 @@ Player trades hands with any other player.         </div></div>
 </div>
 ) 
     } 
-        else if (mycards1==="/static/media/prince.02c4993a.jpg") {
+        else if (mycards1==="/static/media/5-PRINCE.68d95796.png") {
           return (
             <div>
             {showButton_prince && (
@@ -1111,7 +1120,7 @@ Player trades hands with any other player.         </div></div>
 Player can choose any player (including themselves) to discard their hand and draw a new one. If the discarded card is the Princess, the discarding player is eliminated.          </div></div>
         )
     } 
-        else if (mycards1==="/static/media/princess.700d28a3.jpg") {
+        else if (mycards1==="/static/media/8-PRINCESS.5aaf9cd7.png") {
           return (
             <div>
             {use_discard_1_0 &&(
