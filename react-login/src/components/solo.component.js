@@ -47,12 +47,12 @@ export default class Solo extends Component {
             [null]
         ],
         top: [card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12,card13,card14,card15,card16],
-        bottom: [null],
-        rear: [null],
-        bottom2: [null],
-        bottom3: [null],
-        mycards0: [card6],
-        mycards1: [card6],
+        bottom: [],
+        rear: [],
+        bottom2: [],
+        bottom3: [],
+        mycards0: [card16],
+        mycards1: [card16],
         showButton_baron: false,
         showButton_priest: false,
         showButton_king: false,
@@ -74,14 +74,29 @@ export default class Solo extends Component {
     }
 
     startGame = () => {
-        this.draw();
+        this.draw()
+        // this.moveDown(this.state.top[this.state.global_counter])
+        this.state.global_counter++;
         this.state.player[0][0] = this.state.draw;
-        this.draw();
+
+
+        this.draw()
+        // this.moveDown1(this.state.top[this.state.global_counter])
+        this.state.global_counter++;
         this.state.player[1][0] = this.state.draw;
-        this.draw();
+
+        this.draw()
+        // this.moveDown2(this.state.top[this.state.global_counter])
+        this.state.global_counter++;
         this.state.player[2][0] = this.state.draw;
-        this.draw();
+
+
+        
+        this.draw()
+        // this.moveDown3(this.state.top[this.state.global_counter])
+        this.state.global_counter++;
         this.state.player[3][0] = this.state.draw;
+
 
         console.log("Game started");
         this.moveDown(card6)
@@ -98,11 +113,19 @@ export default class Solo extends Component {
 
             this.state.my_turn[0] = false
             this.startGame();
+                // this.moveDown(this.state.top[this.state.global_counter])
+                // this.moveDown1(this.state.top[this.state.global_counter])
+                // this.moveDown2(this.state.top[this.state.global_counter])
+                // this.moveDown3(this.state.top[this.state.global_counter])
+
         }
 
 
 
         else{
+
+            this.state.global_counter++
+            console.log(this.state.top)
             this.state.my_turn[(this.state.turnNumber-1)%4] = true
             this.state.my_turn[(this.state.turnNumber)%4] = false
         }
@@ -159,32 +182,34 @@ export default class Solo extends Component {
         console.log(this.state.turnNumber);
         switch (this.state.turnNumber % 4) {
             case 0:
-                this.moveDown(this.state.top[this.state.global_counter])
                 this.draw();
                 player[0][1] = this.state.draw;
                 this.setState({ mycards0: player[0][0] });
                 this.setState({ mycards1: player[0][1] });
+                this.moveDown(this.state.top[0])
                 break;
             case 1:
-                this.moveDown1(this.state.top[this.state.global_counter])
                 this.draw();
                 player[1][1] = this.state.draw;
                 this.setState({ mycards0: player[1][0] });
                 this.setState({ mycards1: player[1][1] });
+                this.moveDown1(this.state.top[0])
                 break;
             case 2:
-                this.moveDown2(this.state.top[this.state.global_counter])
                 this.draw();
+                this.moveDown2(this.state.top[0])
                 player[2][1] = this.state.draw;
                 this.setState({ mycards0: player[2][0] });
                 this.setState({ mycards1: player[2][1] });
+                this.moveDown2(this.state.top[0])
                 break;
             case 3:
-                this.moveDown3(this.state.top[this.state.global_counter])
                 this.draw();
+                this.moveDown3(this.state.top[0])
                 player[3][1] = this.state.draw;
                 this.setState({ mycards0: player[3][0] });
                 this.setState({ mycards1: player[3][1] });
+                this.moveDown3(this.state.top[0])
                 break;
         }
         console.log(this.state.player[0]);
@@ -221,11 +246,11 @@ export default class Solo extends Component {
 
     }
     moveDown = (item) => {
+        console.log("ANIMATION STARTED")
         const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
-        const itemTop =  - listBottom + this.topList.offsetTop;
+        const itemTop =    - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
         transition.item = item;
-        this.draw();
         transition.startTop = itemTop / 5;
         transition.startAnim = false;
         this.setState({
@@ -240,7 +265,6 @@ export default class Solo extends Component {
         const itemTop =  - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
         transition.item = item;
-        this.draw();
         transition.startTop = itemTop / 5;
         transition.startAnim = false;
         this.setState({
@@ -254,7 +278,6 @@ export default class Solo extends Component {
         const itemTop =  - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
         transition.item = item;
-        this.draw();
         transition.startTop = itemTop / 5;
         transition.startAnim = false;
         this.setState({
@@ -268,7 +291,6 @@ export default class Solo extends Component {
         const itemTop =  - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
         transition.item = item;
-        this.draw();
         transition.startTop = itemTop / 5;
         transition.startAnim = false;
         this.setState({
