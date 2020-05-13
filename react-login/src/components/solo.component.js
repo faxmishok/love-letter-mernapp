@@ -75,35 +75,35 @@ export default class Solo extends Component {
 
     startGame = () => {
         this.draw()
-        // this.moveDown(this.state.top[this.state.global_counter])
+        this.moveDown(this.state.top[0])
         this.state.global_counter++;
         this.state.player[0][0] = this.state.draw;
 
 
         this.draw()
-        // this.moveDown1(this.state.top[this.state.global_counter])
+        this.moveDown1(this.state.top[0])
         this.state.global_counter++;
         this.state.player[1][0] = this.state.draw;
 
         this.draw()
-        // this.moveDown2(this.state.top[this.state.global_counter])
+        this.moveDown2(this.state.top[0])
         this.state.global_counter++;
         this.state.player[2][0] = this.state.draw;
 
 
         
         this.draw()
-        // this.moveDown3(this.state.top[this.state.global_counter])
+        this.moveDown3(this.state.top[0])
         this.state.global_counter++;
         this.state.player[3][0] = this.state.draw;
 
 
         console.log("Game started");
-        this.moveDown(card6)
         console.log(this.state.alreadyDrawn);
     }
     startTurn = (id, evt) => {
-
+            console.log(this.state.top)
+            
         this.state.turnNumber++;
 
 
@@ -125,7 +125,8 @@ export default class Solo extends Component {
         else{
 
             this.state.global_counter++
-            console.log(this.state.top)
+
+
             this.state.my_turn[(this.state.turnNumber-1)%4] = true
             this.state.my_turn[(this.state.turnNumber)%4] = false
         }
@@ -197,7 +198,6 @@ export default class Solo extends Component {
                 break;
             case 2:
                 this.draw();
-                this.moveDown2(this.state.top[0])
                 player[2][1] = this.state.draw;
                 this.setState({ mycards0: player[2][0] });
                 this.setState({ mycards1: player[2][1] });
@@ -205,7 +205,6 @@ export default class Solo extends Component {
                 break;
             case 3:
                 this.draw();
-                this.moveDown3(this.state.top[0])
                 player[3][1] = this.state.draw;
                 this.setState({ mycards0: player[3][0] });
                 this.setState({ mycards1: player[3][1] });
@@ -216,6 +215,10 @@ export default class Solo extends Component {
         console.log(this.state.player[1]);
         console.log(this.state.player[2]);
         console.log(this.state.player[3]);
+            console.log("left"+this.state.rear)
+            console.log("left2"+this.state.bottom)
+            console.log("left3"+this.state.bottom2)
+            console.log("left4"+this.state.bottom3)
 
     }
 
@@ -245,8 +248,9 @@ export default class Solo extends Component {
         }
 
     }
+
     moveDown = (item) => {
-        console.log("ANIMATION STARTED")
+        console.log("ANIMATION1 STARTED")
         const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
         const itemTop =    - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
@@ -255,12 +259,15 @@ export default class Solo extends Component {
         transition.startAnim = false;
         this.setState({
             top: top.filter(x => x !== item),
-            rear: [...rear, item]
+            rear: [...rear, item],
+            transition
         })
-        setTimeout(() => this.resetState(), 0.1);
+        setTimeout(() => this.resetState(),500);
+        console.log("ANIMATION1 ENDED")
     }
 
     moveDown1 = (item) => {
+        console.log("ANIMATION2 STARTED")
         const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
         const itemTop =  - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
@@ -269,11 +276,15 @@ export default class Solo extends Component {
         transition.startAnim = false;
         this.setState({
             top: top.filter(x => x !== item),
-            bottom: [...bottom, item]
+            bottom: [...bottom, item],
+            transition
         })
-        setTimeout(() => this.resetState(), 0.1);
+        setTimeout(() => this.resetState(), 500);
+        console.log("ANIMATION2 ENDED")
+
     }
     moveDown2 = (item) => {
+        console.log("ANIMATION3 STARTED")
         const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
         const itemTop =  - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
@@ -282,11 +293,15 @@ export default class Solo extends Component {
         transition.startAnim = false;
         this.setState({
             top: top.filter(x => x !== item),
-            bottom2: [...bottom2, item]
+            bottom2: [...bottom2, item],
+            transition
         })
-        setTimeout(() => this.resetState(), 0.1);
+        setTimeout(() => this.resetState(), 500);
+        console.log("ANIMATION3 ENDED")
+
     }
     moveDown3 = (item) => {
+        console.log("ANIMATION4 STARTED")
         const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
         const itemTop =  - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
@@ -295,9 +310,12 @@ export default class Solo extends Component {
         transition.startAnim = false;
         this.setState({
             top: top.filter(x => x !== item),
-            bottom3: [...bottom3, item]
+            bottom3: [...bottom3, item],
+            transition
         })
-        setTimeout(() => this.resetState(), 0.1);
+        setTimeout(() => this.resetState(), 500);
+        console.log("ANIMATION4 ENDED")
+
     }
     moveUp = (item, evt) => {
         const listBottom = this.topList.offsetTop + this.topList.clientHeight;
@@ -375,7 +393,12 @@ export default class Solo extends Component {
     resetState = () => {
         const { transition } = this.state;
         transition.startAnim = true;
-        this.setState({ transition });
+
+
+        this.setState({ transition }, () => {
+          console.log('setState finished')
+        })
+
     }
     discard_card = (evt, zero_one) => {
         var { use_discard_1_0, player, mycards0, mycards1, turnNumber } = this.state;
@@ -825,14 +848,11 @@ switch (zero_one) {
                   {top.map((item) => {
                     const startTop = transition.item === item ? transition.startTop : 0;
                     const animClass = transition.startAnim ? 'item-force-move' : '';
-                    const style = {
-                      transform: `translateY(${startTop}px)`,
-                    }
+
                     return (
                       <div 
                         className={`item item-top ${animClass}`}
                         //onClick={(evt) => this.moveDown(item, evt)}
-                        style={style}
                       >
                                     <img src={item} width="125"/>
 
