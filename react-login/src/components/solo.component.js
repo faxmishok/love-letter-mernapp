@@ -47,6 +47,7 @@ export default class Solo extends Component {
             [null]
         ],
         top: [card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12,card13,card14,card15,card16],
+        discard:[],
         bottom: [],
         rear: [],
         bottom2: [],
@@ -78,7 +79,7 @@ export default class Solo extends Component {
         this.moveDown(this.state.top[0])
         this.state.global_counter++;
         this.state.player[0][0] = this.state.draw;
-
+        console.log(this.state.top)
 
         this.draw()
         this.moveDown1(this.state.top[0])
@@ -102,7 +103,6 @@ export default class Solo extends Component {
         console.log(this.state.alreadyDrawn);
     }
     startTurn = (id, evt) => {
-            console.log(this.state.top)
             
         this.state.turnNumber++;
 
@@ -215,10 +215,11 @@ export default class Solo extends Component {
         console.log(this.state.player[1]);
         console.log(this.state.player[2]);
         console.log(this.state.player[3]);
-            console.log("left"+this.state.rear)
-            console.log("left2"+this.state.bottom)
-            console.log("left3"+this.state.bottom2)
-            console.log("left4"+this.state.bottom3)
+            console.log("left "+this.state.rear)
+            console.log("left2 "+this.state.bottom)
+            console.log("left3 "+this.state.bottom2)
+            console.log("left4 "+this.state.bottom3)
+            console.log(this.state.top)
 
     }
 
@@ -317,67 +318,67 @@ export default class Solo extends Component {
         console.log("ANIMATION4 ENDED")
 
     }
-    moveUp = (item, evt) => {
+    moveUp1 = (item) => {
         const listBottom = this.topList.offsetTop + this.topList.clientHeight;
-        const itemTop = evt.target.offsetTop - listBottom;
-        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+        const itemTop =   + listBottom;
+        const { discard, bottom, transition } = this.state;
         transition.item = item;
-        transition.startTop = itemTop;
+        transition.startTop = itemTop/4;
         transition.startAnim = false;
         this.setState({
-            top: [...top, item],
+            discard: [...discard, item],
             bottom: bottom.filter(x => x !== item),
             transition,
         })
-        setTimeout(() => this.resetState(), 1);
+        setTimeout(() => this.resetState(), 500);
     }
 
-    moveDownLeft = (item, evt) => {
-        const listDownlLeft = this.topList.offsetTop + this.topList.clientHeight;
-        const itemTop = evt.target.offsetTop - listDownlLeft;
-        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+    moveUp = (item) => {
+        const listDownlLeft = this.topList.offsetTop + this.topList.clientHeight ;
+        const itemTop =  + listDownlLeft;
+        const { discard, rear, transition } = this.state;
         transition.item = item;
-        transition.startTop = itemTop / 4;
+        transition.startTop = itemTop/4 ;
         transition.startAnim = false;
         this.setState({
-            top: [...top, item],
+            discard: [...discard, item],
             rear: rear.filter(x => x !== item),
             transition,
         })
-        setTimeout(() => this.resetState(), 1);
+        setTimeout(() => this.resetState(), 500);
     }
-    moveUp2 = (item, evt) => {
+    moveUp2 = (item) => {
         const listBottom2 = this.topList.offsetTop + this.topList.clientHeight;
-        const itemTop = evt.target.offsetTop - listBottom2;
-        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+        const itemTop =   + listBottom2;
+        const { discard ,bottom2, transition } = this.state;
         transition.item = item;
         transition.startTop = itemTop / 4;
         transition.startAnim = false;
         this.setState({
-            top: [...top, item],
+            discard: [...discard, item],
             bottom2: bottom2.filter(x => x !== item),
             transition,
         })
-        setTimeout(() => this.resetState(), 1);
+        setTimeout(() => this.resetState(), 500);
     }
-    moveUp3 = (item, evt) => {
+    moveUp3 = (item) => {
         const listBottom3 = this.topList.offsetTop + this.topList.clientHeight;
-        const itemTop = evt.target.offsetTop - listBottom3;
-        const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
+        const itemTop =  + listBottom3;
+        const { discard, bottom3, transition } = this.state;
         transition.item = item;
         transition.startTop = itemTop / 4;
         transition.startAnim = false;
         this.setState({
-            top: [...top, item],
+            discard: [...discard, item],
             bottom3: bottom3.filter(x => x !== item),
             transition,
         })
-        setTimeout(() => this.resetState(), 1);
+        setTimeout(() => this.resetState(), 500);
     }
 
-    delete = (item, evt) => {
+    delete = (item,) => {
         const listBottom3 = this.topList.offsetTop + this.topList.clientHeight;
-        const itemTop = evt.target.offsetTop - listBottom3;
+        const itemTop = - listBottom3;
         const { top, bottom, rear, bottom2, bottom3, mycards, transition } = this.state;
         transition.item = false;
         transition.startTop = false;
@@ -400,34 +401,7 @@ export default class Solo extends Component {
         })
 
     }
-    discard_card = (evt, zero_one) => {
-        var { use_discard_1_0, player, mycards0, mycards1, turnNumber } = this.state;
-        this.setState({ use_discard_1_0: false })
-        //console.log(turnNumber)
-        switch (zero_one) {
-            case 0:
-                player[turnNumber % 4][0] = player[turnNumber % 4][1];
-                break;
-            case 1:
-                break;
-        }
-        player[turnNumber % 4][1] = null;
 
-        
-                if (zero_one === 0) {
-                    mycards0 = null;
-                } else {
-                    mycards1 = null;
-                }
-           
-        // turnNumber=+1
-        this.setState({ player, mycards0, mycards1, turnNumber })
-        // this.startTurn()
-
-
-
-
-    }
     usePriest = evt => { var { showButton_priest } = this.state;
         this.setState({ showButton_priest: true }) }
 
@@ -829,13 +803,69 @@ switch (zero_one) {
 }
 
 
+        discard_animation =(id) =>{
+            switch (id)
+            {
+                case 0:
+                    this.moveUp(this.state.rear[1])
+                    console.log("asd")
+                    console.log(this.state.rear[1])
+                break;
+
+                case 1:
+                    this.moveUp1(this.state.bottom[1])
+                    console.log(this.state.bottom[1])
+
+                break;
+
+                case 2:
+                    this.moveUp2(this.state.bottom2[1])
+                    console.log(this.state.bottom2[1])
+
+                break;
+
+                case 3:
+                    this.moveUp3(this.state.bottom3[1])
+                    console.log(this.state.bottom3[1])
+
+                break;
+            }
+            // this.setState(this.state.bottom,this.state.rear,this.state.bottom3,this.state.bottom2)
+        }
+
+    discard_card = (evt, zero_one) => {
+        var { use_discard_1_0, player, mycards0, mycards1, turnNumber } = this.state;
+        this.setState({ use_discard_1_0: false })
+        //console.log(turnNumber)
+        switch (zero_one) {
+            case 0:
+                player[turnNumber % 4][0] = player[turnNumber % 4][1];
+                break;
+            case 1:
+                break;
+        }
+        this.discard_animation(turnNumber%4)
+        player[turnNumber % 4][1] = null;
+
+        
+                if (zero_one === 0) {
+                    mycards0 = null;
+                } else {
+                    mycards1 = null;
+                }
+           
+        // turnNumber=+1
+        this.setState({ player, mycards0, mycards1, turnNumber })
+        // this.startTurn()
 
 
 
+
+    }
 
 
     render() {
-        let { my_turn, use_discard_1_0, top,showButton_prince, showButton_baron, showButton_guard, showButton_priest, showButton_king, guard_select_card, bottom, rear, bottom2, bottom3, mycards0, mycards1, transition } = this.state
+        let { my_turn, use_discard_1_0,discard, top,showButton_prince, showButton_baron, showButton_guard, showButton_priest, showButton_king, guard_select_card, bottom, rear, bottom2, bottom3, mycards0, mycards1, transition } = this.state
         return (
 
             <div className="bcksolo">
@@ -848,11 +878,14 @@ switch (zero_one) {
                   {top.map((item) => {
                     const startTop = transition.item === item ? transition.startTop : 0;
                     const animClass = transition.startAnim ? 'item-force-move' : '';
-
+                    const style = {
+                      transform: `translateY(${startTop}px)`,
+                    }
                     return (
                       <div 
                         className={`item item-top ${animClass}`}
                         //onClick={(evt) => this.moveDown(item, evt)}
+                         style={style}
                       >
                                     <img src={item} width="125"/>
 
@@ -860,7 +893,25 @@ switch (zero_one) {
                     )
                   })}
                 </div>
+            <div ref={(node) => { this.topList = node; }}>
+                  {discard.map((item) => {
+                    const startTop = transition.item === item ? transition.startTop : 0;
+                    const animClass = transition.startAnim ? 'item-force-move' : '';
+                    const style = {
+                      transform: `translateY(${startTop}px)`,
+                    }
+                    return (
+                      <div 
+                        className={`item item-discard ${animClass}`}
+                        //onClick={(evt) => this.moveDown(item, evt)}
+                         style={style}
+                      >
+                                    <img src={item} width="125"/>
 
+                      </div>
+                    )
+                  })}
+                </div>
               <div className="containerrow_mycard">
 
 
@@ -1254,7 +1305,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     return (
                       <div 
                         className={`item item-bottom ${animClass}`}
-                        //onClick={(evt) => this.moveUp(item, evt)}
+                        // onClick={(evt) => this.moveUp1(item, evt)}
                         style={style}
                       >
                         <img src={item} width="125"/>
@@ -1274,7 +1325,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     return (
                       <div 
                         className={`item item-rear ${animClass}`}
-                        //onClick={(evt) => this.moveDownLeft(item, evt)}
+                        // onClick={(evt) => this.moveUp(item, evt)}
                         style={style}
                       >
                         <img src={item} width="125" />
@@ -1296,7 +1347,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     return (
                       <div 
                         className={`item item-bottom2 ${animClass}`}
-                        //onClick={(evt) => this.moveUp2(item, evt)}
+                        // onClick={(evt) => this.moveUp2(item, evt)}
                         style={style}
                       >
                         <img src={item} width="125"/>
@@ -1319,7 +1370,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     return (
                       <div 
                         className={`item item-bottom3 ${animClass}`}
-                        //onClick={(evt) => this.moveUp3(item, evt)}
+                        // onClick={(evt) => this.moveUp3(item, evt)}
                         style={style}
                       >
                         <img src={item} width="125"/>

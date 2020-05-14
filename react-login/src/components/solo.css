@@ -177,8 +177,8 @@
 .item-discard{
   color: red;
   position: fixed;
-  top: 8vh;
-  right: 100vw;
+  top: 0vh;
+  left:0vw;
 
 }
 
