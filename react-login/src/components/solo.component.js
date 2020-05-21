@@ -18,7 +18,6 @@ import card13 from './backcard/bgcard13.png';
 import card14 from './backcard/bgcard14.png';
 import card15 from './backcard/bgcard15.png';
 import card16 from './backcard/bgcard16.png';
-import card17 from './backcard/bgcard17.png';
 
 
 // import card_baron from './cards/baron.jpg';
@@ -1114,11 +1113,11 @@ Player trades hands with any other player.         </div></div>
       <div>
       {my_turn[0] &&(
         <button className="button_player1" onClick={evt => this.usePrince_id(evt,0,0)} >Player1</button>)}
-      {my_turn[0] &&(
+      {my_turn[1] &&(
         <button className="button_player2" onClick={evt => this.usePrince_id(evt,1,0)}>Player2</button>)}
-      {my_turn[0] &&(
+      {my_turn[2] &&(
         <button className="button_player3" onClick={evt => this.usePrince_id(evt,2,0)}>Player3</button>)}
-      {my_turn[0] &&(
+      {my_turn[3] &&(
         <button className="button_player4" onClick={evt => this.usePrince_id(evt,3,0)}>Player4</button>)}
       </div>
     )}
