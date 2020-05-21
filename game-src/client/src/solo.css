@@ -1,0 +1,13 @@
+html {
+    height: 100%;
+    background: #63D0FF;
+}
+
+body {
+  background-image: url(solo.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+    margin: 0;
+    padding: 0;    height: 100%;
+}

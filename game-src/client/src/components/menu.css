@@ -1,0 +1,88 @@
+
+.bck {
+	background-image: url(./background/menu.jpg); 
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center; 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.button1 {
+  list-style: none;
+  width: 250px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  position: absolute;
+  left: calc(50% - 125px);
+  border: 1px solid #87868c;
+	background-image: linear-gradient(to right, #870000 0%, #190A05 51%, #870000 100%);
+    text-shadow: #333333 1px 1px 1px;
+  font-size: 24px;
+  cursor: pointer;
+  
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+  outline: 2px solid;
+  outline-color: rgba(255, 255, 255, .6);
+    color: white;
+
+  
+}
+.button1:hover {
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, 1);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 25px;
+  }
+.button--Solo {
+  top: 250px;
+}
+.button--Cooperative {
+  top: 325px;
+}
+
+.button--Competitive {
+  top: 400px;
+}
+
+.button--Local {
+  top: 475px;
+}
+.button--Network_Multiplayer {
+  top: 550px;
+}
+.button--exit {
+  top: 625px;
+}
+@-webkit-keyframes hvr-pulse-grow {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+@keyframes hvr-pulse-grow {
+  to {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+.hvr-pulse-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-pulse-grow:hover, .hvr-pulse-grow:focus, .hvr-pulse-grow:active {
+  -webkit-animation-name: hvr-pulse-grow;
+  animation-name: hvr-pulse-grow;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+}

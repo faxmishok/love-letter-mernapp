@@ -1,0 +1,234 @@
+.bcksolo{
+  background-image: url(./background/solo_got4.jpg); 
+        font-family: 'Fondamento', cursive;
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+       z-index: 1;
+}
+
+
+
+.container1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 90vh;
+}
+
+
+.container2 {
+  display: flex;
+  flex-direction: row;
+
+}
+.button_end_turn{
+  position: absolute;
+  top:0vh;
+  left: 0vw;
+}
+.button_card1_use{
+  position: absolute;
+  top:25vh;
+  left: 20vw;
+}
+
+.button_card1_discard{
+  position: absolute;
+  top:30vh;
+  left: 20vw;
+}
+
+.button_Priest{
+  position: absolute;
+  top: 0vh;
+  right:  0vw;
+}
+.button_Baron{
+  position: absolute;
+  top: 10vh;
+  right: 0vw;
+}
+.button_Handmaid{
+  position: absolute;
+  top: 20vh;
+  right: 0vw;
+}
+.button_Prince{
+  position: absolute;
+  top: 30vh;
+  right:  0vw;
+}
+.button_King{
+  position: absolute;
+  top: 40vh;
+  right:  0vw;
+}
+.button_Countess{
+  position: absolute;
+  top: 50vh;
+  right:  0vw;
+}
+.button_Princess{
+  position: absolute;
+  top: 60vh;
+  right:  0vw;
+}
+.button_player1{
+  position: absolute;
+  bottom: 20vh;
+  left: 7vw;
+     z-index: 3;
+
+}
+
+.button_player2{
+    position: absolute;
+  bottom: 20vh;
+  left: 30vw;
+       z-index: 3;
+
+}
+.button_player3{
+    position: absolute;
+  bottom: 20vh;
+  left: 53vw;
+       z-index: 3;
+
+}
+.button_player4{
+    position: absolute;
+  bottom: 20vh;
+  left: 75.9vw;
+       z-index: 3;
+
+}
+.button_card2_use{
+  position: absolute;
+  top:25vh;
+  left: 78vw;
+}
+
+.button_card2_discard{
+  position: absolute;
+  top:30vh;
+  left: 78vw;
+}
+.button_next_turn{
+  position: absolute;
+  top:45vh;
+  left:0vw;
+  width: 100px;
+}
+.containerrow_mycard {
+  display: flex;
+  flex-direction: column;
+
+}
+.about1{
+    text-align: center;
+    color: #00CED1;
+    border: 3px inset white;
+    top: 40vh;
+    position: absolute;
+    right: 53.5vw;
+    left: 27vw;
+
+}
+
+.about2{
+  text-align: center;
+    color: #00CED1;
+    border: 3px inset white;
+
+    top: 40vh;
+    position: absolute;
+    right: 24vw;
+    left: 56.5vw;
+
+}
+
+.item {
+  transition: 2s all;
+  cursor: pointer;
+  text-align: center;
+}
+.item-top {
+  position: fixed;
+  top: 0vh;
+  left: 45vw;
+
+}
+
+.word-allcards{
+  color: red;
+  position: absolute;
+  top: 8vh;
+  left: 30vw;
+  z-index: 2;
+}
+
+
+.item-discard{
+  color: red;
+  position: fixed;
+  top: 0vh;
+  left:20vw;
+
+}
+
+.item-bottom {
+  color: purple;
+  position: absolute;
+  bottom: 0vh;
+  left: 30vw;
+  z-index: 2;
+}
+
+.item-bottom2 {
+  color: white;
+  position: absolute;
+  bottom: 0vh;
+  left: 53vw;
+     z-index: 2;
+}
+.item-bottom3{
+  color: green;
+  position: absolute;
+  bottom: 0vh;
+  left: 75.9vw;
+     z-index: 2;
+}
+
+.item-rear {
+  color: blue;
+  position: absolute;
+  bottom: 0vh;
+  left: 7vw;
+   z-index: 2;
+}
+
+
+.item-mycard1 {
+  position: absolute;
+  bottom: 60vh;
+  left: 30vw;
+  
+}
+
+.item-mycard2 {
+  position: absolute;
+  bottom: 60vh;
+  right: 26.5vw;
+
+}
+
+
+.item-force-move {
+  transform: translateX(0) !important;
+}
