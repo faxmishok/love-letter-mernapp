@@ -1,5 +1,5 @@
 .bcksolo{
-  background-image: url(solo_got4.jpg); 
+  background-image: url(./background/solo_got4.jpg); 
         font-family: 'Fondamento', cursive;
 
   background-repeat: no-repeat;
@@ -178,7 +178,7 @@
   color: red;
   position: fixed;
   top: 0vh;
-  left:0vw;
+  left:20vw;
 
 }
 

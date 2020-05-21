@@ -18,6 +18,7 @@ import card13 from './backcard/bgcard13.png';
 import card14 from './backcard/bgcard14.png';
 import card15 from './backcard/bgcard15.png';
 import card16 from './backcard/bgcard16.png';
+import card17 from './backcard/bgcard17.png';
 
 
 // import card_baron from './cards/baron.jpg';
@@ -46,12 +47,12 @@ export default class Solo extends Component {
             [null],
             [null]
         ],
-        top: [card1,card2,card3,card4,card5,card6,card7,card8,card9,card10,card11,card12,card13,card14,card15,card16],
+        top: [card5,card6,card7,card8,card9,card10,card11,card12,card13,card14,card15,card16],
         discard:[],
-        bottom: [],
-        rear: [],
-        bottom2: [],
-        bottom3: [],
+        bottom: [card2],
+        rear: [card1],
+        bottom2: [card3],
+        bottom3: [card4],
         mycards0: [card16],
         mycards1: [card16],
         showButton_baron: false,
@@ -61,6 +62,7 @@ export default class Solo extends Component {
         showButton_prince: false,
         guard_select_card: false,
         use_discard_1_0: false,
+        show_background: [true,true,true,true],
         id_of_card: 0,
         global_counter: 0,
         my_turn: [true, true, true, true],
@@ -76,25 +78,25 @@ export default class Solo extends Component {
 
     startGame = () => {
         this.draw()
-        this.moveDown(this.state.top[0])
+        // this.moveDown(this.state.top[0])
         this.state.global_counter++;
         this.state.player[0][0] = this.state.draw;
         console.log(this.state.top)
 
         this.draw()
-        this.moveDown1(this.state.top[0])
+        // this.moveDown1(this.state.top[1])
         this.state.global_counter++;
         this.state.player[1][0] = this.state.draw;
 
         this.draw()
-        this.moveDown2(this.state.top[0])
+        // this.moveDown2(this.state.top[2])
         this.state.global_counter++;
         this.state.player[2][0] = this.state.draw;
 
 
         
         this.draw()
-        this.moveDown3(this.state.top[0])
+        // this.moveDown3(this.state.top[3])
         this.state.global_counter++;
         this.state.player[3][0] = this.state.draw;
 
@@ -137,14 +139,16 @@ export default class Solo extends Component {
         if(this.state.player[1][0]==null)
         {
             this.state.my_turn[1] = false
+
         }
         if(this.state.player[2][0]==null)
         {
             this.state.my_turn[2] = false
+
         }
         if(this.state.player[3][0]==null)
         {
-            this.state.my_turn[3] = false
+            this.state.my_turn[3] = false            
         }
 
          
@@ -153,7 +157,6 @@ export default class Solo extends Component {
         var { use_discard_1_0, my_turn } = this.state;
         this.setState({ use_discard_1_0: true })
         var win = 0;
-        console.log(my_turn)
         if(player[0][1]===card_handmaid)
         {
           this.state.my_turn[0] = false
@@ -179,8 +182,9 @@ export default class Solo extends Component {
                 }
         
         alert("It is " + (this.state.turnNumber % 4 + 1) + " player's turn")
+        console.log(my_turn)
 
-        console.log(this.state.turnNumber);
+        // console.log(this.state.turnNumber);
         switch (this.state.turnNumber % 4) {
             case 0:
                 this.draw();
@@ -211,6 +215,25 @@ export default class Solo extends Component {
                 this.moveDown3(this.state.top[0])
                 break;
         }
+                if(this.state.player[0][0]==null)
+        {
+            this.state.show_background[0] = false
+        }
+        if(this.state.player[1][0]==null)
+        {
+            this.state.show_background[1] = false
+
+        }
+        if(this.state.player[2][0]==null)
+        {
+            this.state.show_background[2] = false
+
+        }
+        if(this.state.player[3][0]==null)
+        {
+            this.state.show_background[3] = false
+        }
+
         console.log(this.state.player[0]);
         console.log(this.state.player[1]);
         console.log(this.state.player[2]);
@@ -226,10 +249,10 @@ export default class Solo extends Component {
     async draw() {
         const { deck, alreadyDrawn } = this.state;
         // console.log(deck)
-        console.log(alreadyDrawn)
+        // console.log(alreadyDrawn)
         var found = false;
         if (alreadyDrawn.length == 16) {
-            this.setState({ draw: card6 });
+            this.setState({ draw: null });
             return
         }
         while (1) {
@@ -252,7 +275,7 @@ export default class Solo extends Component {
 
     moveDown = (item) => {
         console.log("ANIMATION1 STARTED")
-        const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
+        const listBottom = this.rearList.offsetTop + this.rearList.clientHeight;
         const itemTop =    - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
         transition.item = item;
@@ -267,7 +290,7 @@ export default class Solo extends Component {
         console.log("ANIMATION1 ENDED")
     }
 
-    moveDown1 = (item) => {
+    moveDown1 = (item) => { 
         console.log("ANIMATION2 STARTED")
         const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
         const itemTop =  - listBottom + this.topList.offsetTop;
@@ -286,7 +309,7 @@ export default class Solo extends Component {
     }
     moveDown2 = (item) => {
         console.log("ANIMATION3 STARTED")
-        const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
+        const listBottom = this.bottom2List.offsetTop + this.bottom2List.clientHeight;
         const itemTop =  - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
         transition.item = item;
@@ -303,7 +326,7 @@ export default class Solo extends Component {
     }
     moveDown3 = (item) => {
         console.log("ANIMATION4 STARTED")
-        const listBottom = this.bottomList.offsetTop + this.bottomList.clientHeight;
+        const listBottom = this.bottom3List.offsetTop + this.bottom3List.clientHeight;
         const itemTop =  - listBottom + this.topList.offsetTop;
         const { top, bottom, rear, bottom2, bottom3, transition } = this.state;
         transition.item = item;
@@ -410,29 +433,30 @@ export default class Solo extends Component {
         var { use_discard_1_0, rear, bottom2, bottom3, bottom, player, mycards0, mycards1, turnNumber, showButton_priest } = this.state;
         var whichPlayer;
         this.setState({ use_discard_1_0: false })
-        switch (id) {
-            case 0:
-                whichPlayer = player[0][0];
-                rear[1] = whichPlayer;
-                rear[0] = card6;
-                break;
-            case 1:
-                whichPlayer = player[1][0];
-                bottom[1] = whichPlayer;
-                bottom[0] = card6;
-                break;
-            case 2:
-                whichPlayer = player[2][0];
-                bottom2[1] = whichPlayer;
-                bottom2[0] = card6;
-                break;
-            case 3:
-                whichPlayer = player[3][0];
-                bottom3[1] = whichPlayer;
-                bottom3[0] = card6;
-                break;
-        }
-
+        this.discard_animation(turnNumber%4)
+        // switch (id) {
+        //     case 0:
+        //         whichPlayer = player[0][0];
+        //         rear[1] = whichPlayer;
+        //         rear[0] = card6;
+        //         break;
+        //     case 1:
+        //         whichPlayer = player[1][0];
+        //         bottom[1] = whichPlayer;
+        //         bottom[0] = card6;
+        //         break;
+        //     case 2:
+        //         whichPlayer = player[2][0];
+        //         bottom2[1] = whichPlayer;
+        //         bottom2[0] = card6;
+        //         break;
+        //     case 3:
+        //         whichPlayer = player[3][0];
+        //         bottom3[1] = whichPlayer;
+        //         bottom3[0] = card6;
+        //         break;
+        // }
+        alert("He has " + player[id][0].substring(14, player[id][0].length-13) + " card")
         
                 if (zero_one === 0) {
                     mycards0 = null;
@@ -472,6 +496,7 @@ export default class Solo extends Component {
         var mid = []
         var { use_discard_1_0, rear, bottom2, bottom3, bottom, player, mycards0, mycards1, turnNumber, showButton_king } = this.state;
         this.setState({ use_discard_1_0: false })
+        this.discard_animation(turnNumber%4)
         switch (zero_one) {
             case 0:
                 player[turnNumber % 4][0] = player[turnNumber % 4][1];
@@ -509,7 +534,9 @@ export default class Solo extends Component {
         var player1_p = 0
         var player2_p = 0
         var { use_discard_1_0, player, mycards0, mycards1, turnNumber, showButton_baron } = this.state;
-        this.setState({ use_discard_1_0: false })
+        this.setState({ use_discard_1_0: false })       
+        this.discard_animation(turnNumber%4)
+
         switch (zero_one) {
             case 0:
                 player[turnNumber % 4][0] = player[turnNumber % 4][1];
@@ -574,15 +601,18 @@ export default class Solo extends Component {
         }
 
 
-        
+                var { rear,bottom,bottom2,bottom3 } = this.state;
                 if (player1_p < player2_p) {
                     player[turnNumber % 4][0] = null
                     mycards1 = null;
                     mycards0 = null;
                     alert("Player " + (turnNumber % 4 + 1) + " lost")
+                    // this.lost_animation(turnNumber%4)
                 } else if (player1_p > player2_p) {
                     player[id][0] = null;
                     alert("Player " + (id + 1) + " lost")
+                    // this.lost_animation(id%4)
+
                 }
                          
                 if (zero_one === 0) {
@@ -590,7 +620,7 @@ export default class Solo extends Component {
                 } else {
                     mycards1 = null;
                 }
-           
+        this.setState({rear,bottom,bottom2,bottom3})
         this.setState({ showButton_baron: false })
         this.setState({ player, mycards0, mycards1 })
 
@@ -608,6 +638,7 @@ export default class Solo extends Component {
     useGuard_id = (evt, id, zero_one) => {
         var { use_discard_1_0, player, mycards0, mycards1, turnNumber, showButton, id_of_card } = this.state;
         this.setState({ use_discard_1_0: false })
+        this.discard_animation(turnNumber%4)
         switch (zero_one) {
             case 0:
                 player[turnNumber % 4][0] = player[turnNumber % 4][1];
@@ -712,6 +743,7 @@ export default class Solo extends Component {
     }
     usePrince_id = (evt, id, zero_one) => {
         var { use_discard_1_0, player, mycards0, mycards1, turnNumber } = this.state;
+        this.discard_animation(turnNumber%4)
         switch (zero_one) {
             case 0:
                 player[turnNumber % 4][0] = player[turnNumber % 4][1];
@@ -766,6 +798,7 @@ export default class Solo extends Component {
         useHandmaid_id = (evt,zero_one) => {
         var { use_discard_1_0, player, mycards0, mycards1, turnNumber} = this.state;
         var switch_card
+        this.discard_animation(turnNumber%4)
 switch (zero_one) {
             case 0:
                 switch_card = player[turnNumber % 4][0]
@@ -790,6 +823,7 @@ switch (zero_one) {
 
         usePrincess_id = (evt,zero_one) => {
         var { use_discard_1_0, player, mycards0, mycards1, turnNumber} = this.state;
+        this.discard_animation(turnNumber%4)
         mycards1 = null
         mycards0 = null
         player[turnNumber%4][0] = null
@@ -807,32 +841,31 @@ switch (zero_one) {
             switch (id)
             {
                 case 0:
-                    this.moveUp(this.state.rear[1])
-                    console.log("asd")
-                    console.log(this.state.rear[1])
+                    this.moveUp(this.state.rear[0])
+                    console.log(this.state.rear[0])
                 break;
 
                 case 1:
-                    this.moveUp1(this.state.bottom[1])
-                    console.log(this.state.bottom[1])
+                    this.moveUp1(this.state.bottom[0])
+                    console.log(this.state.bottom[0])
 
                 break;
 
                 case 2:
-                    this.moveUp2(this.state.bottom2[1])
-                    console.log(this.state.bottom2[1])
+                    this.moveUp2(this.state.bottom2[0])
+                    console.log(this.state.bottom2[0])
 
                 break;
 
                 case 3:
-                    this.moveUp3(this.state.bottom3[1])
-                    console.log(this.state.bottom3[1])
+                    this.moveUp3(this.state.bottom3[0])
+                    console.log(this.state.bottom3[0])
 
                 break;
             }
             // this.setState(this.state.bottom,this.state.rear,this.state.bottom3,this.state.bottom2)
         }
-
+ 
     discard_card = (evt, zero_one) => {
         var { use_discard_1_0, player, mycards0, mycards1, turnNumber } = this.state;
         this.setState({ use_discard_1_0: false })
@@ -865,7 +898,7 @@ switch (zero_one) {
 
 
     render() {
-        let { my_turn, use_discard_1_0,discard, top,showButton_prince, showButton_baron, showButton_guard, showButton_priest, showButton_king, guard_select_card, bottom, rear, bottom2, bottom3, mycards0, mycards1, transition } = this.state
+        let { my_turn, show_background,use_discard_1_0,discard, top,showButton_prince, showButton_baron, showButton_guard, showButton_priest, showButton_king, guard_select_card, bottom, rear, bottom2, bottom3, mycards0, mycards1, transition } = this.state
         return (
 
             <div className="bcksolo">
@@ -1079,10 +1112,14 @@ Player trades hands with any other player.         </div></div>
           return ( <div>
             {showButton_prince && (
       <div>
-        <button className="button_player1" onClick={evt => this.usePrince_id(evt,0,0)} >Player1</button>
-        <button className="button_player2" onClick={evt => this.usePrince_id(evt,1,0)}>Player2</button>
-        <button className="button_player3" onClick={evt => this.usePrince_id(evt,2,0)}>Player3</button>
-        <button className="button_player4" onClick={evt => this.usePrince_id(evt,3,0)}>Player4</button>
+      {my_turn[0] &&(
+        <button className="button_player1" onClick={evt => this.usePrince_id(evt,0,0)} >Player1</button>)}
+      {my_turn[0] &&(
+        <button className="button_player2" onClick={evt => this.usePrince_id(evt,1,0)}>Player2</button>)}
+      {my_turn[0] &&(
+        <button className="button_player3" onClick={evt => this.usePrince_id(evt,2,0)}>Player3</button>)}
+      {my_turn[0] &&(
+        <button className="button_player4" onClick={evt => this.usePrince_id(evt,3,0)}>Player4</button>)}
       </div>
     )}
             {use_discard_1_0 &&(
@@ -1259,10 +1296,14 @@ Player trades hands with any other player.         </div></div>
             <div>
             {showButton_prince && (
       <div>
-        <button className="button_player1" onClick={evt => this.usePrince_id(evt,0,1)} >Player1</button>
-        <button className="button_player2" onClick={evt => this.usePrince_id(evt,1,1)}>Player2</button>
-        <button className="button_player3" onClick={evt => this.usePrince_id(evt,2,1)}>Player3</button>
-        <button className="button_player4" onClick={evt => this.usePrince_id(evt,3,1)}>Player4</button>
+      {my_turn[0] &&(
+        <button className="button_player1" onClick={evt => this.usePrince_id(evt,0,1)} >Player1</button>)}
+       {my_turn[1] &&(
+        <button className="button_player2" onClick={evt => this.usePrince_id(evt,1,1)}>Player2</button>)}
+        {my_turn[2] &&(
+        <button className="button_player3" onClick={evt => this.usePrince_id(evt,2,1)}>Player3</button>)}
+        {my_turn[3] &&(
+        <button className="button_player4" onClick={evt => this.usePrince_id(evt,3,1)}>Player4</button>)}
       </div>
     )}
             {use_discard_1_0 &&(
@@ -1294,7 +1335,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                 </div>
 
                <div className="container2">
-
+            {show_background[1] &&(
                   <div ref={(node) => { this.bottomList = node; }}>
                   {bottom.map((item) => {
                     const startTop = transition.item === item ? transition.startTop : 0;
@@ -1313,8 +1354,9 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     )
                   })}
                 </div>
+               )}
 
-
+            {show_background[0] &&(
                   <div ref={(node) => { this.rearList = node; }}>
                 {rear.map((item) => {
                     const startTop = transition.item === item ? transition.startTop : 0;
@@ -1333,9 +1375,10 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     )
                   })}
                 </div>
+                )}
 
 
-
+            {show_background[2] &&(
 
                   <div ref={(node) => { this.bottom2List = node; }}>
                   {bottom2.map((item) => {
@@ -1356,10 +1399,10 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     )
                   })}
                 </div>
+                )}
 
 
-
-
+            {show_background[3] &&(
                   <div ref={(node) => { this.bottom3List = node; }}>
                   {bottom3.map((item) => {
                     const startTop = transition.item === item ? transition.startTop : 0;
@@ -1378,6 +1421,7 @@ If a player plays this card for any reason, they are eliminated from the round. 
                     )
                   })}
                 </div>
+                )}
                 </div>
 
 
