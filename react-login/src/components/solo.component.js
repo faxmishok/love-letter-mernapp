@@ -18,6 +18,7 @@ import card13 from './backcard/bgcard13.png';
 import card14 from './backcard/bgcard14.png';
 import card15 from './backcard/bgcard15.png';
 import card16 from './backcard/bgcard16.png';
+import card17 from './backcard/bgcard17.png';
 
 
 // import card_baron from './cards/baron.jpg';
@@ -46,7 +47,7 @@ export default class Solo extends Component {
             [null],
             [null]
         ],
-        top: [card5,card6,card7,card8,card9,card10,card11,card12,card13,card14,card15,card16],
+        top: [card5,card6,card7,card8,card9,card10,card11,card12,card13,card14,card15,card16,card17],
         discard:[],
         bottom: [card2],
         rear: [card1],
@@ -878,7 +879,11 @@ switch (zero_one) {
         }
         this.discard_animation(turnNumber%4)
         player[turnNumber % 4][1] = null;
-
+        switch(player[turnNumber % 4][0])
+        {
+            case null:
+            alert("You lost")
+        }
         
                 if (zero_one === 0) {
                     mycards0 = null;
