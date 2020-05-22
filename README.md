@@ -106,7 +106,7 @@ You will have to install dependencies in two steps.Installation of first step wi
    - `npm install` again, to install the front-end dependencies this time.
 
 Once the second npm install command finishes its job, check if the `node_modules` directory has been created inside both root folder of the project - *LoveLetter* and the subfolder *client*. <br /><br />
-After it's done, you can [proceed](#run) to the next step.
+After it's done, you can [proceed](#run-the-app-on-your-machine) to the next step.
 
 
 
