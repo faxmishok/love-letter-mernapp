@@ -34,13 +34,11 @@ make sure you choose **windows installer**.
 One of most ways to install node.js and npm in your linux machine, is to install it by [NVM](https://github.com/nvm-sh/nvm) (Node Version Manager).We suggest you to do it this way as it is a practical tool for managing multiple Node.js versions. 
 1. To install NVM, download the installation script from Github.For that, you will use the curl command line.
    - If you do not have `curl`, install it by running:
-   
-`sudo apt install curl`
-
+     - `sudo apt install curl`
    - Press **y** to confirm the installation and hit **Enter**
    
 2. Now, download the NVM installation script with the command:
-   `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash`
+   - `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash`
    - After it automatically clones the NVM repository and adds the NVM path to ZSH or Bash, you will receive the        following output:
    
 ![Image couldn't found](https://phoenixnap.com/kb/wp-content/uploads/2019/03/download-nvm-installation-script.png   'NVM post-installation output')
