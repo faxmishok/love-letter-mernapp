@@ -111,8 +111,10 @@ After it's done, you can [proceed](#run) to the next step.
 
 
 ## Run the app on your machine
-To run the app, go back to the root folder **`LoveLetter`** by typing `cd ..`
+- To run the app, go back to the root folder **`LoveLetter`** by typing `cd ..`
 
-Once you are in the root folder, simply type:
+- Once you are in the root folder, simply type:
 
 `npm run dev`
+
+- This script is set in ***package.json*** file of root folder of the project, it simply runs back-end and front-end starting scripts simultaneously to get the app deployed on the local computer.
