@@ -71,4 +71,6 @@ One of most ways to install node.js and npm in your linux machine, is to install
    
    - `nvm install 12.16.1`
    
-   
+So that's it.Now you have node and npm installed on your machine.You can check the versions by typing:
+- **`node --version`**
+- **`npm --version`**
