@@ -107,4 +107,12 @@ You will have to install dependencies in two steps.Installation of first step wi
 
 Once the second npm install command finishes its job, check if the `node_modules` directory has been created inside both root folder of the project - *LoveLetter* and the subfolder *client*. <br /><br />
 After it's done, you can [proceed](#run) to the next step.
- 
+
+
+
+## Run the app on your machine
+To run the app, go back to the root folder **`LoveLetter`** by typing `cd ..`
+
+Once you are in the root folder, simply type:
+
+`npm run dev`
