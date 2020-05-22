@@ -74,3 +74,17 @@ One of most ways to install node.js and npm in your linux machine, is to install
 So that's it.Now you have node and npm installed on your machine.You can check the versions by typing:
 - **`node --version`**
 - **`npm --version`**
+
+
+
+## Clone this repository to your computer
+Next step is cloning the current repo to your machine to get this MERN app installed on your computer. <br />
+You can clone it with `git clone` <br />
+`git clone https://github.com/Nauboys/LoveLetter.git`
+
+
+
+## Open terminal and `cd` into cloned repo's directory
+Once the cloning process is complete, don't close the terminal, type: <br />
+`cd LoveLetter` <br />
+instead, this will take you to the project source
