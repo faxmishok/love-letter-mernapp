@@ -6,11 +6,11 @@ All of the eligible young men (and many of the not-so-young) seek to woo the pri
 
 ## Installation and Run
 To install and run this MERN app on your local machine you will need to do bunch of steps first :
-- [Download and install node.js and npm](#download)
-- [Clone this repository to your computer](#clone)
-- [Open terminal and `cd` into cloned repo's directory](#open)
-- [Install dependencies using `npm` node package manager](#dependencies)
-- [Run the app on your machine](#run)
+- [Download and install node.js and npm](#download-and-install-node.js-and-npm)
+- [Clone this repository to your computer](#clone-this-repository-to-your-computer)
+- [Open terminal and `cd` into cloned repo's directory](#open-terminal-and-cd-into-cloned-repo's-directory)
+- [Install dependencies using `npm` node package manager](#install-dependencies-using-npm-node-package-manager)
+- [Run the app on your machine](#run-the-app-on-your-machine)
 
 
 ## Download and install node.js and npm
