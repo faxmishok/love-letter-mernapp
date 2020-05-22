@@ -41,4 +41,4 @@ One of most ways to install node.js and npm in your linux machine, is to install
    `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash`
    - After it automatically clones the NVM repository and adds the NVM path to ZSH or Bash, you will receive the        following output:
    
-![Image couldn't found](https://phoenixnap.com/kb/wp-content/uploads/2019/03/download-nvm-installation-            script.png 'NVM post-installation output')
+![Image couldn't found](https://phoenixnap.com/kb/wp-content/uploads/2019/03/download-nvm-installation-script.png   'NVM post-installation output')
