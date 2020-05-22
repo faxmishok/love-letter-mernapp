@@ -93,14 +93,18 @@ instead, this will take you to the project source
 
 ## Install dependencies using `npm` node package manager
 You will have to install dependencies in two steps.Installation of first step will refer to modules that are required by our back-end source and the second will refer to front-end (react.js) modules.<br /> 
-#### 1. To install back-end `node_modules`, <br />
-        - First, make sure you are inside the **LoveLetter** directory
-        - Then type `npm install` to install the dependencies of back-end source
-#### 2. To install front-end `node_modules`, <br />
-        - Type `cd client` to enter the client subfolder, because that's where the front-end source is located at.
-        - After you verify that you are in the correct folder, type:
-        - `npm install` again, to install the front-end dependencies this time.
+#### 1. To install back-end `node_modules`,
+   - First, make sure you are inside the **LoveLetter** directory
+   
+   - Then type `npm install` to install the dependencies of back-end source
+#### 2. To install front-end `node_modules`,
+        
+   - Type `cd client` to enter the client subfolder, because that's where the front-end source is located at.
+        
+   - After you verify that you are in the correct folder, type:
+   
+   - `npm install` again, to install the front-end dependencies this time.
 
-Once the second npm install command finishes its job, check if the `node_modules` directory has been created inside both root folder of the project - *LoveLetter* and the subfolder *client*. <br />
+Once the second npm install command finishes its job, check if the `node_modules` directory has been created inside both root folder of the project - *LoveLetter* and the subfolder *client*. <br /><br />
 After it's done, you can [proceed](#run) to the next step.
  
