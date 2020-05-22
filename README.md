@@ -58,4 +58,4 @@ One of most ways to install node.js and npm in your linux machine, is to install
    
    - This will list all available versions of **`nvm`**
    
-!couldn't found image](https://phoenixnap.com/kb/wp-content/uploads/2019/03/list-available-nvm-versions.png 'Output of the comment nvm ls-remote')
+![Couldn't found image](https://phoenixnap.com/kb/wp-content/uploads/2019/03/list-available-nvm-versions.png 'Output of the comment nvm ls-remote')
