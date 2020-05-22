@@ -49,7 +49,7 @@ One of most ways to install node.js and npm in your linux machine, is to install
    - Close and open the terminal or
    - Run the given command in the above figure
 
-4. Finally, check whether the installation was successful by verifying `nvm` version:
+4. Check whether the installation was successful by verifying `nvm` version:
    - `nvm --version`
    
    - Once you have installed **`nvm`**, you can find a list of all the available Node.js versions with the command: 
@@ -59,3 +59,16 @@ One of most ways to install node.js and npm in your linux machine, is to install
    - This will list all available versions of **`nvm`**
    
 ![Couldn't found image](https://phoenixnap.com/kb/wp-content/uploads/2019/03/list-available-nvm-versions.png 'Output of the comment nvm ls-remote')
+
+5. Finally, install a specific version
+   - NVM is a package manager; it can install and manage multiple Node.js versions.
+   
+   - To install a particular version, use the command `nvm install` and add the number of the version.
+   
+   - For the sake of this particular project, we will use version **12.16.1**
+   
+   - To install, just type the following command:
+   
+   - `nvm install 12.16.1`
+   
+   
